@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { sanityClient } from '@/lib/sanity.client'
-import { postsQuery } from '@/lib/sanity.queries'
+// import { postsQuery } from '@/lib/sanity.queries'
 
 interface Post {
   slug: string

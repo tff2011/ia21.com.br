@@ -2,11 +2,12 @@
 nixPkgs = ['nodejs_20']
 
 [phases.install]
-cmds = ['npm ci']
+# Use npm install to avoid CI failing when the lockfile isn't in context
+cmds = ['npm install --no-audit --no-fund']
 dependsOn = ['setup']
 
 [phases.build]
-cmds = ['npm run build']
+cmds = ['npx prisma generate', 'npm run build']
 dependsOn = ['install']
 
 [start]

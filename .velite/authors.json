@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Dr. Maria Silva",
+    "slug": "maria-silva",
+    "avatar": "/images/authors/maria-silva.jpg",
+    "bio": "Doutora em Inteligência Artificial e professora especialista em tecnologias emergentes. Mais de 10 anos de experiência em ensino e desenvolvimento de IA.",
+    "social": {
+      "twitter": "https://twitter.com/mariasilvaai",
+      "linkedin": "https://linkedin.com/in/mariasilvaai",
+      "github": "https://github.com/mariasilvaai"
+    },
+    "body": "const{Fragment:n,jsx:e,jsxs:i}=arguments[0];function _createMdxContent(r){const a={h2:\"h2\",li:\"li\",p:\"p\",ul:\"ul\",...r.components};return i(n,{children:[e(a.p,{children:\"Dr. Maria Silva é uma das principais especialistas em Inteligência Artificial do Brasil, com doutorado em Ciência da Computação pela USP e pós-doutorado em Machine Learning por Stanford.\"}),\"\\n\",e(a.h2,{children:\"Experiência\"}),\"\\n\",i(a.ul,{children:[\"\\n\",e(a.li,{children:\"10+ anos em ensino de IA e tecnologias emergentes\"}),\"\\n\",e(a.li,{children:\"Autora de mais de 50 artigos científicos\"}),\"\\n\",e(a.li,{children:\"Consultora para grandes empresas de tecnologia\"}),\"\\n\",e(a.li,{children:\"Palestrante internacional em conferências de IA\"}),\"\\n\"]}),\"\\n\",e(a.h2,{children:\"Especialidades\"}),\"\\n\",i(a.ul,{children:[\"\\n\",e(a.li,{children:\"Machine Learning e Deep Learning\"}),\"\\n\",e(a.li,{children:\"Processamento de Linguagem Natural\"}),\"\\n\",e(a.li,{children:\"Computer Vision\"}),\"\\n\",e(a.li,{children:\"Ethics in AI\"}),\"\\n\"]})]})}return{default:function(n={}){const{wrapper:i}=n.components||{};return i?e(i,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+  }
+]

@@ -3,18 +3,17 @@
 import { api } from "@/lib/trpc-client"
 
 import { useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DownloadForm } from "@/components/materials/download-form"
-import { ArrowLeft, FileText, Clock, Users, Download } from "lucide-react"
+import { ArrowLeft, FileText, Download } from "lucide-react"
 import { notFound } from "next/navigation"
 
 export default function MaterialDownloadPage() {
   const params = useParams()
-  const router = useRouter()
   const slug = params.slug as string
 
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)

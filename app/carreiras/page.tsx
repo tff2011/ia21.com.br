@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Users, Target, Heart, Trophy, MapPin, Clock, DollarSign, Briefcase, Mail, Phone } from 'lucide-react'
+import { Users, Target, Heart, Trophy, Clock, DollarSign, Briefcase, Mail, Phone } from 'lucide-react'
 
 export default function CarreirasPage() {
   const handleScrollToSection = (sectionId: string) => {
@@ -49,62 +49,7 @@ export default function CarreirasPage() {
     }
   ]
 
-  const positions = [
-    {
-      title: 'Desenvolvedor Full-Stack',
-      department: 'Tecnologia',
-      type: 'CLT',
-      location: 'São Paulo, SP',
-      description: 'Desenvolver e manter aplicações web modernas usando React, Next.js e Node.js',
-      requirements: ['React/Next.js', 'Node.js', 'PostgreSQL', 'Git'],
-      benefits: 'R$ 8.000 - R$ 12.000 + benefícios'
-    },
-    {
-      title: 'Designer UX/UI',
-      department: 'Design',
-      type: 'CLT',
-      location: 'São Paulo, SP',
-      description: 'Criar interfaces intuitivas e experiências memoráveis para nossos alunos',
-      requirements: ['Figma', 'Adobe Creative Suite', 'Prototipagem', 'Pesquisa UX'],
-      benefits: 'R$ 6.000 - R$ 9.000 + benefícios'
-    },
-    {
-      title: 'Especialista em Marketing Digital',
-      department: 'Marketing',
-      type: 'CLT',
-      location: 'São Paulo, SP',
-      description: 'Gerenciar campanhas digitais e estratégias de crescimento da plataforma',
-      requirements: ['Google Ads', 'SEO/SEM', 'Analytics', 'Marketing de Conteúdo'],
-      benefits: 'R$ 5.000 - R$ 8.000 + benefícios'
-    },
-    {
-      title: 'Instrutor de Desenvolvimento Web',
-      department: 'Educação',
-      type: 'PJ',
-      location: 'Remoto',
-      description: 'Ministrar cursos e mentorias em desenvolvimento web e tecnologias modernas',
-      requirements: ['Experiência prática', 'Habilidades de comunicação', 'Tecnologias web', 'Ensino online'],
-      benefits: 'R$ 80 - R$ 150/hora'
-    },
-    {
-      title: 'Analista de Dados',
-      department: 'Dados',
-      type: 'CLT',
-      location: 'São Paulo, SP',
-      description: 'Analisar dados educacionais para melhorar a experiência dos alunos',
-      requirements: ['Python/R', 'SQL', 'Tableau/Power BI', 'Estatística'],
-      benefits: 'R$ 7.000 - R$ 10.000 + benefícios'
-    },
-    {
-      title: 'Coordenador Pedagógico',
-      department: 'Educação',
-      type: 'CLT',
-      location: 'São Paulo, SP',
-      description: 'Coordenar desenvolvimento de conteúdo e qualidade educacional',
-      requirements: ['Experiência em educação', 'Coordenação de equipes', 'Metodologias ativas', 'Tecnologias educacionais'],
-      benefits: 'R$ 6.000 - R$ 9.000 + benefícios'
-    }
-  ]
+  // As vagas serão exibidas aqui quando houver posições abertas
 
   return (
     <div className="min-h-screen bg-background">
@@ -312,4 +257,3 @@ export default function CarreirasPage() {
     </div>
   )
 }
-

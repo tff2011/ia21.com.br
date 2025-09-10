@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { sanityClient } from '@/lib/sanity.client'
-import { postQuery } from '@/lib/sanity.queries'
-import { PortableText } from '@portabletext/react'
+import { getPostBySlug, getPublishedPosts } from '@/lib/content'
+import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Calendar, Clock, User, ArrowLeft, Share2 } from 'lucide-react'
+import { Calendar, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-react'
+import { MDXComponents } from '@/components/MDXComponents'
 
 interface Post {
   _id: string
@@ -50,8 +50,48 @@ interface Post {
 
 async function getPost(slug: string): Promise<Post | null> {
   try {
-    const post = await sanityClient.fetch(postQuery, { slug })
-    return post
+    // First try to get from Sanity
+    const sanityPost = await sanityClient.fetch(postQuery, { slug })
+    if (sanityPost) {
+      return { ...sanityPost, source: 'sanity' }
+    }
+
+    // If not found in Sanity, try Velite
+    const velitePost = getPostBySlug(slug)
+    if (velitePost) {
+      return {
+        _id: `velite-${velitePost.slug}`,
+        title: velitePost.title,
+        slug: velitePost.slug,
+        excerpt: velitePost.excerpt,
+        publishedAt: velitePost.date,
+        body: velitePost.body,
+        tags: velitePost.tags,
+        categories: velitePost.categories.map(cat => ({
+          _id: `cat-${cat}`,
+          title: cat,
+          slug: cat.toLowerCase()
+        })),
+        author: {
+          _id: `author-${velitePost.author.slug}`,
+          name: velitePost.author.name,
+          slug: velitePost.author.slug,
+          bio: velitePost.author.bio,
+          image: velitePost.author.avatar ? {
+            asset: { url: velitePost.author.avatar }
+          } : undefined,
+          email: undefined,
+          website: velitePost.author.social?.website
+        },
+        coverImage: velitePost.image ? {
+          asset: { url: velitePost.image },
+          alt: velitePost.title
+        } : undefined,
+        source: 'velite'
+      }
+    }
+
+    return null
   } catch (error) {
     console.error('Error fetching post:', error)
     return null
@@ -210,6 +250,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     {category.title}
                   </Badge>
                 ))}
+                {post.source === 'velite' && (
+                  <Badge variant="default" className="text-xs bg-primary/10 text-primary border-primary/20">
+                    Conteúdo Premium
+                  </Badge>
+                )}
                 {post.tags.slice(0, 3).map((tag) => (
                   <Badge key={tag} variant="outline" className="text-xs">
                     {tag}
@@ -279,7 +324,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="prose prose-lg max-w-none">
             {post.body ? (
-              <PortableText value={post.body as unknown as never} components={portableTextComponents as unknown as never} />
+              post.source === 'velite' ? (
+                <MDXRemote
+                  source={post.body}
+                  components={MDXComponents}
+                />
+              ) : (
+                <PortableText value={post.body as unknown as never} components={portableTextComponents as unknown as never} />
+              )
             ) : null}
           </div>
         </div>
