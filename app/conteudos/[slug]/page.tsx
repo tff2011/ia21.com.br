@@ -9,89 +9,14 @@ import { Separator } from '@/components/ui/separator'
 import { Calendar, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-react'
 import { MDXComponents } from '@/components/MDXComponents'
 
-interface Post {
-  _id: string
-  title: string
-  slug: string
-  excerpt: string
-  publishedAt: string
-  body: unknown
-  coverImage?: {
-    asset: {
-      url: string
-    }
-    alt?: string
-  }
-  tags: string[]
-  categories: Array<{
-    _id: string
-    title: string
-    slug: string
-    color?: string
-  }>
-  author: {
-    _id: string
-    name: string
-    slug: string
-    bio?: string
-    image?: {
-      asset: {
-        url: string
-      }
-    }
-    email?: string
-    website?: string
-    social?: {
-      twitter?: string
-      linkedin?: string
-    }
-  }
-}
 
-async function getPost(slug: string): Promise<Post | null> {
+async function getPost(slug: string) {
   try {
-    // First try to get from Sanity
-    const sanityPost = await sanityClient.fetch(postQuery, { slug })
-    if (sanityPost) {
-      return { ...sanityPost, source: 'sanity' }
+    const post = getPostBySlug(slug)
+    if (!post || !post.published) {
+      return null
     }
-
-    // If not found in Sanity, try Velite
-    const velitePost = getPostBySlug(slug)
-    if (velitePost) {
-      return {
-        _id: `velite-${velitePost.slug}`,
-        title: velitePost.title,
-        slug: velitePost.slug,
-        excerpt: velitePost.excerpt,
-        publishedAt: velitePost.date,
-        body: velitePost.body,
-        tags: velitePost.tags,
-        categories: velitePost.categories.map(cat => ({
-          _id: `cat-${cat}`,
-          title: cat,
-          slug: cat.toLowerCase()
-        })),
-        author: {
-          _id: `author-${velitePost.author.slug}`,
-          name: velitePost.author.name,
-          slug: velitePost.author.slug,
-          bio: velitePost.author.bio,
-          image: velitePost.author.avatar ? {
-            asset: { url: velitePost.author.avatar }
-          } : undefined,
-          email: undefined,
-          website: velitePost.author.social?.website
-        },
-        coverImage: velitePost.image ? {
-          asset: { url: velitePost.image },
-          alt: velitePost.title
-        } : undefined,
-        source: 'velite'
-      }
-    }
-
-    return null
+    return post
   } catch (error) {
     console.error('Error fetching post:', error)
     return null
@@ -101,7 +26,7 @@ async function getPost(slug: string): Promise<Post | null> {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = await getPost(slug)
-  
+
   if (!post) {
     return {
       title: 'Post não encontrado - IA21 Educação',
@@ -109,9 +34,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
-  const publishedTime = new Date(post.publishedAt).toISOString()
-  const modifiedTime = publishedTime // Use publishedAt as fallback
-  
+  const publishedTime = new Date(post.date).toISOString()
+  const modifiedTime = publishedTime
+
   return {
     title: `${post.title} | IA21 Educação`,
     description: post.excerpt || `Aprenda sobre ${post.tags?.slice(0, 3).join(', ')} com este artigo detalhado da IA21 Educação.`,
@@ -125,12 +50,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       modifiedTime,
       authors: [post.author.name],
       tags: post.tags,
-      images: post.coverImage ? [
+      images: post.image ? [
         {
-          url: post.coverImage.asset.url,
+          url: post.image,
           width: 1200,
           height: 630,
-          alt: post.coverImage.alt || post.title,
+          alt: post.title,
         }
       ] : [],
     },
@@ -138,49 +63,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: post.coverImage ? [post.coverImage.asset.url] : [],
+      images: post.image ? [post.image] : [],
     },
     alternates: {
-      canonical: `/conteudos/${post.slug}`,
+      canonical: `/conteudos/${post.slugAsParams}`,
     },
   }
 }
 
-import type { ReactNode } from 'react'
-
-const portableTextComponents = {
-  block: {
-    h1: ({ children }: { children: ReactNode }) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
-    h2: ({ children }: { children: ReactNode }) => <h2 className="text-2xl font-bold mt-6 mb-3">{children}</h2>,
-    h3: ({ children }: { children: ReactNode }) => <h3 className="text-xl font-bold mt-5 mb-2">{children}</h3>,
-    normal: ({ children }: { children: ReactNode }) => <p className="mb-4 leading-7">{children}</p>,
-    blockquote: ({ children }: { children: ReactNode }) => (
-      <blockquote className="border-l-4 border-primary pl-4 my-6 italic text-muted-foreground">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }: { children: ReactNode }) => <ul className="list-disc list-inside mb-4 space-y-1">{children}</ul>,
-    number: ({ children }: { children: ReactNode }) => <ol className="list-decimal list-inside mb-4 space-y-1">{children}</ol>,
-  },
-  listItem: {
-    bullet: ({ children }: { children: ReactNode }) => <li className="mb-1">{children}</li>,
-    number: ({ children }: { children: ReactNode }) => <li className="mb-1">{children}</li>,
-  },
-  marks: {
-    strong: ({ children }: { children: ReactNode }) => <strong className="font-bold">{children}</strong>,
-    em: ({ children }: { children: ReactNode }) => <em className="italic">{children}</em>,
-    code: ({ children }: { children: ReactNode }) => (
-      <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
-    ),
-    link: (props: { children: ReactNode; value?: { href?: string } }) => (
-      <a href={props.value?.href} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-        {props.children}
-      </a>
-    ),
-  },
-}
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -195,14 +85,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.excerpt,
-    "image": post.coverImage ? post.coverImage.asset.url : undefined,
-    "datePublished": post.publishedAt,
-    "dateModified": post.publishedAt,
+    "image": post.image,
+    "datePublished": post.date,
+    "dateModified": post.date,
     "author": {
       "@type": "Person",
       "name": post.author.name,
-      "url": post.author.website,
-      "image": post.author.image?.asset.url,
+      "url": post.author.social?.website,
+      "image": post.author.avatar,
     },
     "publisher": {
       "@type": "Organization",
@@ -214,14 +104,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://ia21.com.br/conteudos/${post.slug}`
+      "@id": `https://ia21.com.br/conteudos/${post.slugAsParams}`
     },
     "keywords": post.tags,
-    "articleSection": post.categories[0]?.title,
+    "articleSection": post.categories[0],
   }
 
-  const bodyLength = Array.isArray(post.body) ? post.body.length : 0
-  const estimatedReadTime = Math.ceil(bodyLength * 0.5) // Rough estimate
+  const estimatedReadTime = Math.ceil(post.body.length / 1000) + 2
 
   return (
     <>
@@ -243,18 +132,29 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="space-y-6">
+              {/* Breadcrumb */}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Link href="/conteudos" className="hover:text-primary transition-colors">
+                  Conteúdos
+                </Link>
+                <span>/</span>
+                <span>MDX</span>
+                <span>/</span>
+                <span>{post.title}</span>
+            </div>
+
+            <div className="space-y-6">
               {/* Categories and Tags */}
               <div className="flex flex-wrap items-center gap-2">
                 {post.categories.map((category) => (
-                  <Badge key={category._id} variant="secondary" className="text-xs">
-                    {category.title}
+                  <Badge key={category} variant="secondary" className="text-xs">
+                    {category}
                   </Badge>
                 ))}
-                {post.source === 'velite' && (
-                  <Badge variant="default" className="text-xs bg-primary/10 text-primary border-primary/20">
-                    Conteúdo Premium
-                  </Badge>
-                )}
+                <Badge variant="default" className="text-xs bg-primary/10 text-primary border-primary/20">
+                  <BookOpen className="h-3 w-3 mr-1" />
+                  Conteúdo MDX
+                </Badge>
                 {post.tags.slice(0, 3).map((tag) => (
                   <Badge key={tag} variant="outline" className="text-xs">
                     {tag}
@@ -282,8 +182,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <time dateTime={post.publishedAt}>
-                    {new Date(post.publishedAt).toLocaleDateString('pt-BR')}
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString('pt-BR')}
                   </time>
                 </div>
                 <div className="flex items-center gap-2">
@@ -310,11 +210,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Cover Image */}
-        {post.coverImage && (
+        {post.image && (
           <div className="relative h-[50vh] bg-muted">
             <img
-              src={post.coverImage.asset.url}
-              alt={post.coverImage.alt || post.title}
+              src={post.image}
+              alt={post.title}
               className="w-full h-full object-cover"
             />
           </div>
@@ -323,16 +223,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {/* Content */}
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="prose prose-lg max-w-none">
-            {post.body ? (
-              post.source === 'velite' ? (
-                <MDXRemote
-                  source={post.body}
-                  components={MDXComponents}
-                />
-              ) : (
-                <PortableText value={post.body as unknown as never} components={portableTextComponents as unknown as never} />
-              )
-            ) : null}
+            <MDXRemote
+              source={post.body}
+              components={MDXComponents}
+            />
           </div>
         </div>
 
@@ -341,9 +235,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="bg-muted/30 rounded-lg p-8">
             <div className="flex items-start gap-6">
-              {post.author.image && (
+              {post.author.avatar && (
                 <img
-                  src={post.author.image.asset.url}
+                  src={post.author.avatar}
                   alt={post.author.name}
                   className="w-20 h-20 rounded-full object-cover"
                 />
@@ -357,9 +251,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   </p>
                 )}
                 <div className="flex gap-4">
-                  {post.author.website && (
+                  {post.author.social?.website && (
                     <Button asChild variant="outline" size="sm">
-                      <a href={post.author.website} target="_blank" rel="noopener noreferrer">
+                      <a href={post.author.social.website} target="_blank" rel="noopener noreferrer">
                         Website
                       </a>
                     </Button>

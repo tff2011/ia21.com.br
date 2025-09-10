@@ -1,14 +1,15 @@
 [
   {
-    "name": "Dr. Maria Silva",
-    "slug": "maria-silva",
-    "avatar": "/images/authors/maria-silva.jpg",
-    "bio": "Doutora em Inteligência Artificial e professora especialista em tecnologias emergentes. Mais de 10 anos de experiência em ensino e desenvolvimento de IA.",
+    "name": "Thiago Felizola Freires",
+    "slug": "thiago-felizola",
+    "avatar": "/images/authors/thiago-felizola.jpg",
+    "bio": "Especialista em Inteligência Artificial com foco em aplicações práticas para negócios e educação. Fundador da IA21 Educação.",
     "social": {
-      "twitter": "https://twitter.com/mariasilvaai",
-      "linkedin": "https://linkedin.com/in/mariasilvaai",
-      "github": "https://github.com/mariasilvaai"
+      "twitter": "https://twitter.com/thiagofelizola",
+      "linkedin": "https://linkedin.com/in/thiagofelizola",
+      "github": "https://github.com/thiagofelizola",
+      "website": "https://thiagofelizola.com"
     },
-    "body": "const{Fragment:n,jsx:e,jsxs:i}=arguments[0];function _createMdxContent(r){const a={h2:\"h2\",li:\"li\",p:\"p\",ul:\"ul\",...r.components};return i(n,{children:[e(a.p,{children:\"Dr. Maria Silva é uma das principais especialistas em Inteligência Artificial do Brasil, com doutorado em Ciência da Computação pela USP e pós-doutorado em Machine Learning por Stanford.\"}),\"\\n\",e(a.h2,{children:\"Experiência\"}),\"\\n\",i(a.ul,{children:[\"\\n\",e(a.li,{children:\"10+ anos em ensino de IA e tecnologias emergentes\"}),\"\\n\",e(a.li,{children:\"Autora de mais de 50 artigos científicos\"}),\"\\n\",e(a.li,{children:\"Consultora para grandes empresas de tecnologia\"}),\"\\n\",e(a.li,{children:\"Palestrante internacional em conferências de IA\"}),\"\\n\"]}),\"\\n\",e(a.h2,{children:\"Especialidades\"}),\"\\n\",i(a.ul,{children:[\"\\n\",e(a.li,{children:\"Machine Learning e Deep Learning\"}),\"\\n\",e(a.li,{children:\"Processamento de Linguagem Natural\"}),\"\\n\",e(a.li,{children:\"Computer Vision\"}),\"\\n\",e(a.li,{children:\"Ethics in AI\"}),\"\\n\"]})]})}return{default:function(n={}){const{wrapper:i}=n.components||{};return i?e(i,{...n,children:e(_createMdxContent,{...n})}):_createMdxContent(n)}};"
+    "body": "const{Fragment:e,jsx:n,jsxs:i}=arguments[0];function _createMdxContent(a){const r={h2:\"h2\",li:\"li\",p:\"p\",ul:\"ul\",...a.components};return i(e,{children:[n(r.p,{children:\"Thiago Felizola Freires é especialista em Inteligência Artificial e fundador da IA21 Educação, dedicada a democratizar o conhecimento em tecnologias emergentes.\"}),\"\\n\",n(r.h2,{children:\"Experiência\"}),\"\\n\",i(r.ul,{children:[\"\\n\",n(r.li,{children:\"Especialista em aplicações práticas de IA para negócios\"}),\"\\n\",n(r.li,{children:\"Fundador da IA21 Educação\"}),\"\\n\",n(r.li,{children:\"Consultor em transformação digital\"}),\"\\n\",n(r.li,{children:\"Instrutor de cursos avançados em Machine Learning\"}),\"\\n\"]}),\"\\n\",n(r.h2,{children:\"Especialidades\"}),\"\\n\",i(r.ul,{children:[\"\\n\",n(r.li,{children:\"Machine Learning aplicado a negócios\"}),\"\\n\",n(r.li,{children:\"Automação inteligente de processos\"}),\"\\n\",n(r.li,{children:\"Análise preditiva e tomada de decisão\"}),\"\\n\",n(r.li,{children:\"Estratégias de adoção de IA em empresas\"}),\"\\n\"]})]})}return{default:function(e={}){const{wrapper:i}=e.components||{};return i?n(i,{...e,children:n(_createMdxContent,{...e})}):_createMdxContent(e)}};"
   }
 ]
