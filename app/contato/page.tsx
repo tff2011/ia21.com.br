@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -10,6 +10,11 @@ import { Badge } from '@/components/ui/badge'
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react'
 
 export default function ContatoPage() {
+  // Garantir que a página sempre abra no topo
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [])
+
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -53,72 +58,35 @@ export default function ContatoPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header Section */}
-      <section className="py-20 px-4 bg-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto text-center">
-          <Badge variant="secondary" className="px-3 py-1 bg-primary-foreground/10 text-primary-foreground mb-4">
-            📞 Fale Conosco
-          </Badge>
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Entre em <span className="text-primary-foreground/80">Contato</span>
-          </h1>
-          <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed">
-            Estamos aqui para ajudar você a transformar sua carreira em tecnologia.
-            Tire suas dúvidas e receba orientação personalizada.
-          </p>
+      {/* Hero Section with Background Image */}
+      <div className="relative min-h-[70vh] flex items-center">
+        <div className="absolute inset-0">
+          <img
+            src="/hero-contato-clean.webp"
+            alt="Equipe profissional colaborando em ambiente de tecnologia moderna"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
         </div>
-      </section>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center space-y-6 max-w-4xl mx-auto">
+            <Badge variant="secondary" className="px-4 py-2 text-white border-white/20 bg-white/10 backdrop-blur-sm">
+              📞 Fale Conosco
+            </Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+              Entre em <span className="text-primary">Contato</span>
+            </h1>
+            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Estamos aqui para ajudar você a dominar a inteligência artificial e transformar sua carreira.
+              Tire suas dúvidas e receba orientação especializada em IA aplicada.
+            </p>
+          </div>
+        </div>
+      </div>
 
-      {/* Contact Info Cards */}
+      {/* Contact Form - Prioridade */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-semibold mb-2">Email</h3>
-                <p className="text-sm text-muted-foreground">contato@ia21.com.br</p>
-                <p className="text-xs text-muted-foreground mt-1">Resposta em até 24h</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Phone className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-semibold mb-2">Telefone</h3>
-                <p className="text-sm text-muted-foreground">(11) 9999-9999</p>
-                <p className="text-xs text-muted-foreground mt-1">Seg-Sex, 9h às 18h</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-semibold mb-2">Localização</h3>
-                <p className="text-sm text-muted-foreground">Brasília, DF - Brasil</p>
-                <p className="text-xs text-muted-foreground mt-1">Atendimento remoto</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-semibold mb-2">Horário</h3>
-                <p className="text-sm text-muted-foreground">Seg-Sex: 9h-18h</p>
-                <p className="text-xs text-muted-foreground mt-1">Sáb: 9h-12h</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Contact Form */}
           <div className="max-w-2xl mx-auto">
             <Card>
               <CardHeader className="text-center">
@@ -226,6 +194,61 @@ export default function ContatoPage() {
                 )}
               </CardContent>
             </Card>
+          </div>
+
+          {/* Contact Info Cards - Após o formulário */}
+          <div className="mt-16">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold mb-4">Outras formas de contato</h2>
+              <p className="text-muted-foreground">
+                Além do formulário, você também pode nos contatar diretamente
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Mail className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Email</h3>
+                  <p className="text-sm text-muted-foreground">contato@ia21.com.br</p>
+                  <p className="text-xs text-muted-foreground mt-1">Resposta em até 24h</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Phone className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Telefone</h3>
+                  <p className="text-sm text-muted-foreground">(11) 9999-9999</p>
+                  <p className="text-xs text-muted-foreground mt-1">Seg-Sex, 9h às 18h</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MapPin className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Localização</h3>
+                  <p className="text-sm text-muted-foreground">Brasília, DF - Brasil</p>
+                  <p className="text-xs text-muted-foreground mt-1">Atendimento remoto</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Clock className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2">Horário</h3>
+                  <p className="text-sm text-muted-foreground">Seg-Sex: 9h-18h</p>
+                  <p className="text-xs text-muted-foreground mt-1">Sáb: 9h-12h</p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>

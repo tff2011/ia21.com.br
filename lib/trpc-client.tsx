@@ -5,6 +5,7 @@ import { httpBatchLink } from '@trpc/client'
 import { useState } from 'react'
 import superjson from 'superjson'
 import { trpc } from './trpc-client-instance'
+export const api = trpc
 
 export function TRPCProvider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient())

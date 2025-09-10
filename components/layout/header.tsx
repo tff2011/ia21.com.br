@@ -17,7 +17,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 
 const navigation = [
-  { name: 'Conteúdos', href: '/conteudos' },
   { name: 'Sobre Nós', href: '/sobre' },
 ]
 
@@ -25,6 +24,13 @@ const programsMenu = [
   { name: 'Todos os Programas', href: '/programas' },
   { name: 'Para Você', href: '/para-voce' },
   { name: 'Para Empresas', href: '/para-empresas' },
+]
+
+const conteudosMenu = [
+  { name: 'Podcasts', href: '/podcasts', icon: '🎙️' },
+  { name: 'Blog', href: '/conteudos', icon: '📝' },
+  { name: 'Glossário', href: '/glossario', icon: '📚' },
+  { name: 'Materiais Gratuitos', href: '/materiais-gratuitos', icon: '📋' },
 ]
 
 export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
@@ -100,7 +106,28 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          
+
+          {/* Conteúdos Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className={`flex items-center text-sm font-semibold leading-6 transition-colors ${
+              theme === 'blue'
+                ? 'text-brand-deep-navy-blue hover:text-brand-tech-blue'
+                : 'text-brand-dark-gray hover:text-brand-metallic-gold'
+            }`}>
+              Conteúdos
+              <ChevronDown className="ml-1 h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-48">
+              {conteudosMenu.map((item) => (
+                <DropdownMenuItem key={item.name} asChild>
+                  <Link href={item.href} className="w-full">
+                    {item.name}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {/* Other Navigation Items */}
           {navigation.map((item) => (
             <Link
@@ -239,6 +266,25 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
                     </div>
                   </div>
                   
+                  {/* Conteúdos Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider">
+                      Conteúdos
+                    </h3>
+                    <div className="space-y-1">
+                      {conteudosMenu.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className="block rounded-lg px-4 py-3 text-base font-medium text-white hover:bg-white/10 transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
                   {/* Other Navigation Items */}
                   <div className="space-y-4">
                     <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider">

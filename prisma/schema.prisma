@@ -94,3 +94,50 @@ enum EnrollmentStatus {
   rejected
   cancelled
 }
+
+// Lead model for capturing contact information from free materials downloads
+model Lead {
+  id        String      @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  profession Profession
+  materialId String
+  material   Material    @relation(fields: [materialId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@map("leads")
+}
+
+// Free Material model for downloadable resources
+model Material {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String?
+  excerpt     String?
+  fileUrl     String
+  fileName    String?
+  fileSize    String?
+  category    String?
+  published   Boolean  @default(false)
+  downloadCount Int     @default(0)
+  leads       Lead[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("materials")
+}
+
+// Profession enum for lead categorization
+enum Profession {
+  professional_liberal     // Profissional Liberal/Autônomo
+  entrepreneur            // Empresário
+  employee                // Empregado CLT
+  executive_manager       // Executivo/Gestor
+  consultant              // Consultor
+  freelancer              // Freelancer
+  student                 // Estudante
+  other                   // Outro
+}

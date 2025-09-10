@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react'
 import { FaTiktok, FaYoutube } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
@@ -53,6 +56,15 @@ interface FooterProps {
 }
 
 export function Footer({ theme = 'gold' }: FooterProps) {
+  const router = useRouter()
+
+  const handleNavigation = (href: string) => {
+    // Scroll to top before navigation
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    // Navigate to the page
+    router.push(href)
+  }
+
   const themeClasses = {
     gold: {
       bg: 'bg-brand-rich-black',
@@ -131,12 +143,12 @@ export function Footer({ theme = 'gold' }: FooterProps) {
               <ul role="list" className="mt-6 space-y-4">
                 {navigation.solutions.map((item) => (
                   <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    <button
+                      onClick={() => handleNavigation(item.href)}
+                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors text-left"
                     >
                       {item.name}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -146,12 +158,12 @@ export function Footer({ theme = 'gold' }: FooterProps) {
               <ul role="list" className="mt-6 space-y-4">
                 {navigation.support.map((item) => (
                   <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    <button
+                      onClick={() => handleNavigation(item.href)}
+                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors text-left"
                     >
                       {item.name}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -161,12 +173,12 @@ export function Footer({ theme = 'gold' }: FooterProps) {
               <ul role="list" className="mt-6 space-y-4">
                 {navigation.company.map((item) => (
                   <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    <button
+                      onClick={() => handleNavigation(item.href)}
+                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors text-left"
                     >
                       {item.name}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -214,28 +226,28 @@ export function Footer({ theme = 'gold' }: FooterProps) {
         <div className="mt-8 border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex flex-wrap gap-x-6 gap-y-2 md:order-2">
             <p className="text-xs leading-5 text-gray-400">
-              <Link
-                href="/privacidade"
+              <button
+                onClick={() => handleNavigation('/privacidade')}
                 className="hover:text-gray-300 transition-colors"
               >
                 Política de Privacidade
-              </Link>
+              </button>
             </p>
             <p className="text-xs leading-5 text-gray-400">
-              <Link
-                href="/termos"
+              <button
+                onClick={() => handleNavigation('/termos')}
                 className="hover:text-gray-300 transition-colors"
               >
                 Termos de Uso
-              </Link>
+              </button>
             </p>
             <p className="text-xs leading-5 text-gray-400">
-              <Link
-                href="/cookies"
+              <button
+                onClick={() => handleNavigation('/cookies')}
                 className="hover:text-gray-300 transition-colors"
               >
                 Política de Cookies
-              </Link>
+              </button>
             </p>
           </div>
           <p className="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">

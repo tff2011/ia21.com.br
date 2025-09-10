@@ -6,6 +6,16 @@ import { Button } from '@/components/ui/button'
 import { Users, Target, Heart, Trophy, MapPin, Clock, DollarSign, Briefcase, Mail, Phone } from 'lucide-react'
 
 export default function CarreirasPage() {
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   const benefits = [
     {
       icon: Heart,
@@ -122,14 +132,15 @@ export default function CarreirasPage() {
               Buscamos pessoas apaixonadas por inovação e impacto social.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg px-8 py-4">
-                Ver Vagas Abertas
-              </Button>
               <Button
                 size="lg"
-                className="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-all duration-300 shadow-lg px-8 py-4"
+                className="btn-hero-primary px-8 py-4"
+                onClick={() => handleScrollToSection('sobre-nos')}
               >
-                Enviar Currículo
+                Conheça Nossa Empresa
+              </Button>
+              <Button size="lg" className="btn-hero-secondary px-8 py-4">
+                Deixar Currículo
               </Button>
             </div>
           </div>
@@ -137,7 +148,7 @@ export default function CarreirasPage() {
       </div>
 
       {/* About Section */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div id="sobre-nos" className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold">Por que trabalhar na IA21?</h2>
@@ -223,60 +234,29 @@ export default function CarreirasPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Vagas Abertas</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Estamos sempre em busca de talento. Confira nossas oportunidades atuais e
-              candidate-se àquela que mais combina com seu perfil.
+              No momento, não temos vagas abertas, mas estamos sempre em busca de talento excepcional.
             </p>
           </div>
 
-          <div className="grid gap-6">
-            {positions.map((position, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-xl mb-2">{position.title}</CardTitle>
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        <Badge variant="secondary">{position.department}</Badge>
-                        <Badge variant="outline">{position.type}</Badge>
-                        <Badge variant="outline" className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {position.location}
-                        </Badge>
-                      </div>
-                      <CardDescription className="text-base">
-                        {position.description}
-                      </CardDescription>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm text-muted-foreground mb-2">Faixa salarial</div>
-                      <div className="font-semibold text-primary">{position.benefits}</div>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-semibold mb-3">Requisitos</h4>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        {position.requirements.map((req, i) => (
-                          <li key={i} className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                            {req}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="flex items-end">
-                      <Button className="w-full md:w-auto">
-                        <Mail className="w-4 h-4 mr-2" />
-                        Candidatar-se
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <Card className="max-w-2xl mx-auto text-center py-12">
+            <CardContent className="space-y-6">
+              <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
+                <Briefcase className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-semibold">Sem vagas abertas no momento</h3>
+                <p className="text-muted-foreground">
+                  Mas isso não significa que não estamos interessados em conhecer você!
+                  Deixe seu currículo conosco e entraremos em contato quando surgirem
+                  oportunidades que combinem com seu perfil.
+                </p>
+              </div>
+              <Button size="lg" className="mt-6">
+                <Mail className="w-4 h-4 mr-2" />
+                Deixar Currículo
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
         {/* CTA Section */}

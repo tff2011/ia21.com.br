@@ -217,3 +217,111 @@
 .prose-custom a {
   @apply text-primary hover:text-primary/80 underline underline-offset-2;
 }
+
+/* ===========================================
+   BUTTON CONTRAST UTILITIES
+   Para uso sobre imagens de fundo
+   =========================================== */
+
+/* Botão sólido com garantia de contraste */
+.btn-overlay-solid {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg backdrop-blur-sm;
+}
+
+/* Botão outline com garantia de contraste */
+.btn-overlay-outline {
+  @apply bg-white/10 border-2 border-white text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-all duration-300 shadow-lg;
+}
+
+/* Botão secundário com garantia de contraste */
+.btn-overlay-secondary {
+  @apply bg-white/20 border border-white/60 text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-all duration-300 shadow-lg;
+}
+
+/* Botão CTA principal para hero sections */
+.btn-hero-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl backdrop-blur-sm border border-primary-foreground/20;
+}
+
+/* Botão CTA secundário para hero sections */
+.btn-hero-secondary {
+  @apply bg-white/10 border-2 border-white text-white hover:bg-white hover:text-gray-900 backdrop-blur-md transition-all duration-300 shadow-xl;
+}
+
+/* ===========================================
+   MATERIAIS GRATUITOS STYLES
+   Estilos específicos para a seção de materiais gratuitos
+   =========================================== */
+
+/* Line clamp utilities */
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Material card hover effects */
+.material-card {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* Download form animations */
+.download-form-enter {
+  animation: slideInFromRight 0.5s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Success animation */
+.success-checkmark {
+  animation: checkmark 0.8s ease-in-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Loading spinner */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Material stats hover effect */
+.material-stat:hover {
+  @apply transform scale-105 transition-transform duration-200;
+}
+
+/* Download button gradient */
+.download-btn-gradient {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700;
+}

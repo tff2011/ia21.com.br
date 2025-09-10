@@ -30,4 +30,37 @@ Follow these rules when you write code:
 - Use “class:” instead of the tertiary operator in class tags whenever possible.
 - Use descriptive variable and function/const names. Also, event functions should be named with a “handle” prefix, like “handleClick” for onClick and “handleKeyDown” for onKeyDown.
 - Implement accessibility features on elements. For example, a tag should have a tabindex=“0”, aria-label, on:click, and on:keydown, and similar attributes.
-- Use consts instead of functions, for example, “const toggle = () =>”. Also, define a type if possible.
+- Use consts instead of functions, for example, "const toggle = () =>". Also, define a type if possible.
+
+### Brand & Strategy Guidelines
+**SEMPRE** considere estes arquivos estratégicos ao desenvolver qualquer funcionalidade:
+
+#### 📋 **PUBLICO-ALVO.md**
+- **OBRIGATORIAMENTE** leia e considere o perfil do público-alvo antes de qualquer desenvolvimento
+- Aplique as características do público (29-47 anos, gestores, tecnologia, inovação)
+- Considere as dores, desejos e comportamentos descritos no arquivo
+- Foque em soluções que atendam às necessidades específicas deste público
+
+#### 🎤 **TOM-DE-VOZ.md**
+- **SEMPRE** aplique o tom de voz: aspiracional + educacional + tech
+- Use as palavras-chave: futuro, revolução, prática, impacto, escala, transformação, inovação
+- Mantenha o equilíbrio entre autoridade e proximidade
+- Inclua CTAs claros conforme as diretrizes do arquivo
+- Garanta clareza acima de tudo, com frases curtas e diretas
+
+### Development Workflow
+1. **ANTES de começar qualquer desenvolvimento:**
+   - Leia PUBLICO-ALVO.md para entender o público
+   - Revise TOM-DE-VOZ.md para alinhar tom de voz
+   - Planeje considerando ambos os documentos
+
+2. **DURANTE o desenvolvimento:**
+   - Garanta que o conteúdo atenda às necessidades do público-alvo
+   - Mantenha consistência com o tom de voz definido
+   - Aplique as melhores práticas de UX/UI
+
+3. **APÓS o desenvolvimento:**
+   - Verifique se o resultado está alinhado com ambos os documentos
+   - Garanta que a experiência seja consistente com a marca IA21
+
+**IMPORTANTE**: Estes arquivos são fundamentais para manter a consistência da marca e a efetividade das soluções desenvolvidas para o público da IA21 Educação.
