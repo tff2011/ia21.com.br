@@ -113,6 +113,8 @@ export function Footer({ theme = 'gold' }: FooterProps) {
                 <Link
                   key={item.name}
                   href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`text-gray-400 ${currentTheme.accentHover} transition-colors`}
                 >
                   <span className="sr-only">{item.name}</span>

@@ -17,13 +17,14 @@ export function ClientLayout({
   const isBusinessTheme = pathname?.startsWith('/para-empresas')
   const footerTheme = isBusinessTheme ? 'blue' : 'gold'
   const headerTheme = isBusinessTheme ? 'blue' : 'gold'
+  const isHomePage = pathname === '/'
 
   return (
     <SessionProvider>
       <TRPCProvider>
         <div className={`flex min-h-screen flex-col ${isBusinessTheme ? 'theme-blue' : ''}`}>
           <Header theme={headerTheme} />
-          <BreadcrumbComponent />
+          {!isHomePage && <BreadcrumbComponent />}
           <main className="flex-1">
             {children}
           </main>

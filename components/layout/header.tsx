@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
-import { Menu, User, LogOut, ChevronDown } from 'lucide-react'
+import { Menu, User, LogOut, ChevronDown, UserCircle, GraduationCap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { 
   DropdownMenu, 
@@ -18,7 +18,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/s
 
 const navigation = [
   { name: 'Conteúdos', href: '/conteudos' },
-  { name: 'Sobre', href: '/sobre' },
+  { name: 'Sobre Nós', href: '/sobre' },
 ]
 
 const programsMenu = [
@@ -159,11 +159,17 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" asChild>
-                <Link href="/login">Entrar</Link>
-              </Button>
               <Button asChild>
-                <Link href="/signup">Cadastrar</Link>
+                <Link href="/signup" className="flex items-center gap-2">
+                  <GraduationCap className="h-4 w-4" />
+                  Aplique-se
+                </Link>
+              </Button>
+              <Button variant="ghost" asChild>
+                <Link href="/login" className="flex items-center gap-2">
+                  <UserCircle className="h-4 w-4" />
+                  Entrar
+                </Link>
               </Button>
             </>
           )}
@@ -296,18 +302,20 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
                   ) : (
                     <div className="space-y-3">
                       <Link
-                        href="/login"
-                        className="block rounded-lg px-4 py-3 text-base font-semibold text-white hover:bg-white/10 transition-colors text-center"
+                        href="/signup"
+                        className="flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-base font-semibold bg-white/20 hover:bg-white/30 border border-white/30 text-white transition-colors text-center"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Entrar
+                        <GraduationCap className="h-5 w-5" />
+                        Aplique-se
                       </Link>
                       <Link
-                        href="/signup"
-                        className="block rounded-lg px-4 py-3 text-base font-semibold bg-white/20 hover:bg-white/30 border border-white/30 text-white transition-colors text-center"
+                        href="/login"
+                        className="flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-base font-semibold text-white hover:bg-white/10 transition-colors text-center"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        Cadastrar
+                        <UserCircle className="h-5 w-5" />
+                        Entrar
                       </Link>
                     </div>
                   )}

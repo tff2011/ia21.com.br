@@ -98,21 +98,40 @@ export default function CarreirasPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-primary/10 to-primary/5 border-b">
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <div className="text-center space-y-4">
-            <Badge variant="secondary" className="px-3 py-1">
-              <Users className="w-4 h-4 mr-2" />
+      {/* Hero Section with Background Image */}
+      <div className="relative min-h-[70vh] flex items-center">
+        <div className="absolute inset-0">
+          <img
+            src="/hero-carreiras.webp"
+            alt="Equipe colaborativa trabalhando em ambiente de inovação tecnológica"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center space-y-6">
+            <Badge variant="secondary" className="px-4 py-2 text-white border-white/20 bg-white/10 backdrop-blur-sm">
+              <Users className="w-5 h-5 mr-2" />
               Carreiras
             </Badge>
-            <h1 className="text-4xl lg:text-5xl font-bold">
+            <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
               Faça Parte do <span className="text-primary">Futuro</span> da Educação
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Junte-se à nossa equipe e ajude a transformar vidas através da educação tecnológica.
               Buscamos pessoas apaixonadas por inovação e impacto social.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg px-8 py-4">
+                Ver Vagas Abertas
+              </Button>
+              <Button
+                size="lg"
+                className="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm transition-all duration-300 shadow-lg px-8 py-4"
+              >
+                Enviar Currículo
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -274,7 +293,11 @@ export default function CarreirasPage() {
                 <Briefcase className="w-4 h-4 mr-2" />
                 Enviar Currículo
               </Button>
-              <Button variant="outline" size="lg">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+              >
                 <Phone className="w-4 h-4 mr-2" />
                 Falar com RH
               </Button>
