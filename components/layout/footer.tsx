@@ -12,17 +12,11 @@ const navigation = {
   support: [
     { name: 'Central de Ajuda', href: '/ajuda' },
     { name: 'Contato', href: '/contato' },
-    { name: 'Suporte Técnico', href: '/suporte' },
   ],
   company: [
     { name: 'Sobre', href: '/sobre' },
     { name: 'Blog', href: '/conteudos' },
     { name: 'Carreiras', href: '/carreiras' },
-  ],
-  legal: [
-    { name: 'Privacidade', href: '/privacidade' },
-    { name: 'Termos de Uso', href: '/termos' },
-    { name: 'Política de Cookies', href: '/cookies' },
   ],
 }
 
@@ -109,7 +103,7 @@ export function Footer({ theme = 'gold' }: FooterProps) {
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
                 <MapPin className={`h-5 w-5 ${currentTheme.accent}`} />
-                <span className="text-sm">São Paulo, SP - Brasil</span>
+                <span className="text-sm">Brasília, DF - Brasil</span>
               </div>
             </div>
 
@@ -129,70 +123,51 @@ export function Footer({ theme = 'gold' }: FooterProps) {
           </div>
 
           {/* Navigation Links */}
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Programas</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.solutions.map((item) => (
-                    <li key={item.name}>
-                      <Link 
-                        href={item.href} 
-                        className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Suporte</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <Link 
-                        href={item.href} 
-                        className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 xl:col-span-2 xl:mt-0">
+            <div>
+              <h3 className="text-sm font-semibold leading-6 text-white">Programas</h3>
+              <ul role="list" className="mt-6 space-y-4">
+                {navigation.solutions.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Empresa</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <Link 
-                        href={item.href} 
-                        className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Legal</h3>
-                <ul role="list" className="mt-6 space-y-4">
-                  {navigation.legal.map((item) => (
-                    <li key={item.name}>
-                      <Link 
-                        href={item.href} 
-                        className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div>
+              <h3 className="text-sm font-semibold leading-6 text-white">Suporte</h3>
+              <ul role="list" className="mt-6 space-y-4">
+                {navigation.support.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold leading-6 text-white">Empresa</h3>
+              <ul role="list" className="mt-6 space-y-4">
+                {navigation.company.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -235,21 +210,29 @@ export function Footer({ theme = 'gold' }: FooterProps) {
 
         {/* Copyright */}
         <div className="mt-8 border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
-          <div className="flex space-x-6 md:order-2">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 md:order-2">
             <p className="text-xs leading-5 text-gray-400">
-              <Link 
-                href="/privacidade" 
+              <Link
+                href="/privacidade"
                 className="hover:text-gray-300 transition-colors"
               >
                 Política de Privacidade
               </Link>
             </p>
             <p className="text-xs leading-5 text-gray-400">
-              <Link 
-                href="/termos" 
+              <Link
+                href="/termos"
                 className="hover:text-gray-300 transition-colors"
               >
                 Termos de Uso
+              </Link>
+            </p>
+            <p className="text-xs leading-5 text-gray-400">
+              <Link
+                href="/cookies"
+                className="hover:text-gray-300 transition-colors"
+              >
+                Política de Cookies
               </Link>
             </p>
           </div>

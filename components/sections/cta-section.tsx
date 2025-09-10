@@ -7,8 +7,18 @@ import { ArrowRight, Mail, Phone, MessageCircle } from 'lucide-react'
 
 export function CTASection() {
   return (
-    <section className="py-20 px-4 bg-primary text-primary-foreground">
-      <div className="max-w-7xl mx-auto">
+    <section
+      className="py-20 px-4 bg-primary text-primary-foreground relative"
+      style={{
+        backgroundImage: 'url(/cta-background.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/60"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="space-y-8">
@@ -37,10 +47,9 @@ export function CTASection() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="text-lg px-8 py-6 bg-white/10 border-white text-white hover:bg-white hover:text-primary backdrop-blur-sm"
               >
-                <Phone className="mr-2 h-5 w-5" />
+                <Phone className="mr-2 h-5 w-5 text-white" />
                 Falar com Especialista
               </Button>
             </div>
@@ -63,46 +72,46 @@ export function CTASection() {
           </div>
 
           {/* Contact Card */}
-          <Card className="bg-primary-foreground/5 border-primary-foreground/20">
+          <Card className="bg-white/20 border-white/30 backdrop-blur-md">
             <CardContent className="p-8">
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-2xl font-semibold mb-2 text-primary-foreground">
+                  <h3 className="text-2xl font-semibold mb-2 text-white">
                     Entre em Contato
                   </h3>
-                  <p className="text-primary-foreground/80">
+                  <p className="text-white/90">
                     Tire suas dúvidas e receba orientação personalizada
                   </p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3 p-4 rounded-lg bg-primary-foreground/10">
-                    <Mail className="h-5 w-5 text-primary-foreground" />
+                  <div className="flex items-center gap-3 p-4 rounded-lg bg-white/40 border border-white/20">
+                    <Mail className="h-5 w-5 text-white" />
                     <div>
-                      <div className="font-medium text-primary-foreground">Email</div>
-                      <div className="text-sm text-primary-foreground/80">contato@ia21.com.br</div>
+                      <div className="font-medium text-white">Email</div>
+                      <div className="text-sm text-white/90">contato@ia21.com.br</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-4 rounded-lg bg-primary-foreground/10">
-                    <Phone className="h-5 w-5 text-primary-foreground" />
+                  <div className="flex items-center gap-3 p-4 rounded-lg bg-white/40 border border-white/20">
+                    <Phone className="h-5 w-5 text-white" />
                     <div>
-                      <div className="font-medium text-primary-foreground">Telefone</div>
-                      <div className="text-sm text-primary-foreground/80">(11) 9999-9999</div>
+                      <div className="font-medium text-white">Telefone</div>
+                      <div className="text-sm text-white/90">(11) 9999-9999</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-4 rounded-lg bg-primary-foreground/10">
-                    <MessageCircle className="h-5 w-5 text-primary-foreground" />
+                  <div className="flex items-center gap-3 p-4 rounded-lg bg-white/40 border border-white/20">
+                    <MessageCircle className="h-5 w-5 text-white" />
                     <div>
-                      <div className="font-medium text-primary-foreground">WhatsApp</div>
-                      <div className="text-sm text-primary-foreground/80">(11) 9999-9999</div>
+                      <div className="font-medium text-white">WhatsApp</div>
+                      <div className="text-sm text-white/90">(11) 9999-9999</div>
                     </div>
                   </div>
                 </div>
 
                 <Button
-                  className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   size="lg"
                 >
                   Iniciar Conversa

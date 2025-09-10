@@ -4,8 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Clock, Users, Star, ArrowRight } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export function ProgramsSection() {
+  const pathname = usePathname()
+  const isBusinessTheme = pathname?.startsWith('/para-empresas')
   const programs = [
     {
       id: 1,
@@ -71,8 +74,12 @@ export function ProgramsSection() {
               <CardHeader className="pb-4">
                 <div className="flex justify-between items-start mb-2">
                   <Badge
-                    variant={program.theme === 'gold' ? 'default' : 'secondary'}
-                    className={program.theme === 'gold' ? 'bg-[#C8A64B] hover:bg-[#A6863B]' : ''}
+                    variant="default"
+                    className={
+                      isBusinessTheme
+                        ? 'bg-brand-tech-blue hover:bg-brand-tech-blue/90 text-white'
+                        : 'bg-brand-metallic-gold hover:bg-brand-metallic-gold/90 text-white'
+                    }
                   >
                     {program.level}
                   </Badge>

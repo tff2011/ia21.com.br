@@ -15,7 +15,7 @@ import { ChevronRight, Home } from 'lucide-react'
 
 // Mapeamento de rotas para nomes legíveis e SEO
 const routeLabels: Record<string, string> = {
-  '': 'Home',
+  '': 'Inicio',
   'programas': 'Programas',
   'para-voce': 'Para Você',
   'para-empresas': 'Para Empresas',
@@ -99,6 +99,7 @@ const formatDynamicRoute = (segment: string, index: number, allSegments: string[
 
 export default function BreadcrumbComponent() {
   const pathname = usePathname()
+  const isBusinessTheme = pathname?.startsWith('/para-empresas')
 
   // Remove query parameters e hash
   const cleanPathname = pathname.split('?')[0].split('#')[0]
@@ -135,9 +136,9 @@ export default function BreadcrumbComponent() {
     return crumbs
   }, [pathSegments])
 
-  // Não mostra breadcrumb na página inicial ou páginas especiais
-  const hideBreadcrumbPages = ['/', '/login', '/signup', '/dashboard']
-  if (hideBreadcrumbPages.includes(pathname) || pathSegments.length === 0) {
+  // Não mostra breadcrumb em páginas especiais
+  const hideBreadcrumbPages = ['/login', '/signup', '/dashboard']
+  if (hideBreadcrumbPages.includes(pathname)) {
     return null
   }
 
@@ -166,13 +167,17 @@ export default function BreadcrumbComponent() {
       {/* Breadcrumb Visual */}
       <nav
         aria-label="Navegação estrutural do site"
-        className="py-4 px-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"
+        className={`py-4 px-4 backdrop-blur supports-[backdrop-filter]:backdrop-blur-sm border-b ${
+          isBusinessTheme
+            ? 'bg-sky-blue/95 border-brand-tech-blue/20'
+            : 'bg-white/95 border-gray-200'
+        }`}
         itemScope
         itemType="https://schema.org/BreadcrumbList"
       >
         <div className="max-w-7xl mx-auto">
           <Breadcrumb>
-            <BreadcrumbList>
+            <BreadcrumbList className="flex-wrap sm:flex-nowrap">
               {breadcrumbs.map((crumb, index) => (
                 <React.Fragment key={crumb.href}>
                   {index > 0 && (
@@ -188,7 +193,7 @@ export default function BreadcrumbComponent() {
                     {crumb.isLast ? (
                       <>
                         <BreadcrumbPage
-                          className="font-medium text-foreground"
+                          className="font-medium text-foreground whitespace-nowrap"
                           itemProp="name"
                         >
                           {crumb.name}
@@ -200,11 +205,11 @@ export default function BreadcrumbComponent() {
                         <BreadcrumbLink asChild>
                           <Link
                             href={crumb.href}
-                            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
                             itemProp="item"
                           >
-                            <span itemProp="name">
-                              {index === 0 && <Home className="h-4 w-4 mr-1" />}
+                            <span itemProp="name" className="flex items-center gap-2">
+                              {index === 0 && <Home className="h-4 w-4" />}
                               {crumb.name}
                             </span>
                           </Link>

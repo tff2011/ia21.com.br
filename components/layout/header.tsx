@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
-import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react'
+import { Menu, User, LogOut, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { 
   DropdownMenu, 
@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 
 const navigation = [
   { name: 'Conteúdos', href: '/conteudos' },
@@ -27,24 +27,24 @@ const programsMenu = [
   { name: 'Para Empresas', href: '/para-empresas' },
 ]
 
-export function Header() {
+export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { data: session, status } = useSession()
   const pathname = usePathname()
-  
+
   const isBusinessSection = pathname?.startsWith('/para-empresas')
   const isPersonalSection = pathname?.startsWith('/para-voce')
-  
+
   const getLogoText = () => {
     if (isBusinessSection) {
       return {
         text: 'para empresas',
-        colorClass: 'text-brand-tech-blue'
+        colorClass: 'text-white'
       }
     } else if (isPersonalSection) {
       return {
         text: 'para você',
-        colorClass: 'text-brand-metallic-gold'
+        colorClass: 'text-white'
       }
     }
     return null
@@ -61,17 +61,17 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className={`sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 ${theme === 'blue' ? 'theme-blue' : ''}`}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         {/* Logo */}
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3">
-            <span className="text-2xl font-bold text-brand-metallic-gold">IA21</span>
+            <span className={`text-2xl font-bold ${theme === 'blue' ? 'text-brand-tech-blue' : 'text-brand-metallic-gold'}`}>IA21</span>
             {logoText && (
               <div className="flex items-center">
                 <div className="w-px h-6 bg-gray-300 mx-2"></div>
-                <span className={`text-sm font-medium tracking-wide ${logoText.colorClass}`}>
-                  {logoText.text}
+                <span className={`text-sm font-medium tracking-wide ${theme === 'blue' ? 'text-brand-tech-blue' : 'text-brand-metallic-gold'}`}>
+                  {isBusinessSection ? 'para empresas' : 'para você'}
                 </span>
               </div>
             )}
@@ -82,7 +82,11 @@ export function Header() {
         <div className="hidden lg:flex lg:gap-x-8">
           {/* Programs Dropdown */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center text-sm font-semibold leading-6 text-brand-dark-gray hover:text-brand-metallic-gold transition-colors">
+            <DropdownMenuTrigger className={`flex items-center text-sm font-semibold leading-6 transition-colors ${
+              theme === 'blue'
+                ? 'text-brand-deep-navy-blue hover:text-brand-tech-blue'
+                : 'text-brand-dark-gray hover:text-brand-metallic-gold'
+            }`}>
               Programas
               <ChevronDown className="ml-1 h-4 w-4" />
             </DropdownMenuTrigger>
@@ -102,7 +106,11 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-brand-dark-gray hover:text-brand-metallic-gold transition-colors"
+              className={`text-sm font-semibold leading-6 transition-colors ${
+                theme === 'blue'
+                  ? 'text-brand-deep-navy-blue hover:text-brand-tech-blue'
+                  : 'text-brand-dark-gray hover:text-brand-metallic-gold'
+              }`}
             >
               {item.name}
             </Link>
@@ -165,60 +173,58 @@ export function Header() {
         <div className="flex lg:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="sm" className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors ${
+                  theme === 'blue' 
+                    ? 'text-brand-deep-navy-blue hover:text-brand-tech-blue hover:bg-brand-tech-blue/10' 
+                    : 'text-brand-dark-gray hover:text-brand-metallic-gold hover:bg-brand-metallic-gold/10'
+                }`}
+              >
                 <span className="sr-only">Abrir menu principal</span>
                 <Menu className="h-6 w-6" aria-hidden="true" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-sm">
-              <div className="flex items-center justify-between">
-                <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="text-2xl font-bold text-brand-metallic-gold">IA21</span>
+            <SheetContent
+              side="right"
+              className={`w-full max-w-sm border-0 ${
+                theme === 'blue'
+                  ? 'bg-brand-tech-blue'
+                  : 'bg-brand-metallic-gold'
+              }`}
+            >
+              <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
+              
+              {/* Header do Menu */}
+              <div className="flex items-center justify-between pb-6 border-b border-white/20">
+                <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="text-2xl font-bold text-white">IA21</span>
                   {logoText && (
                     <div className="flex items-center">
-                      <div className="w-px h-6 bg-gray-300 mx-2"></div>
-                      <span className={`text-sm font-medium tracking-wide ${logoText.colorClass}`}>
+                      <div className="w-px h-6 bg-white/30 mx-2"></div>
+                      <span className="text-sm font-medium tracking-wide text-white">
                         {logoText.text}
                       </span>
                     </div>
                   )}
                 </Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                >
-                  <span className="sr-only">Fechar menu</span>
-                  <X className="h-6 w-6" aria-hidden="true" />
-                </Button>
               </div>
 
-              <div className="mt-6 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/10">
-                  <div className="space-y-2 py-6">
-                    {/* Programs Section */}
+              {/* Conteúdo do Menu */}
+              <div className="flex flex-col h-full pt-6">
+                <div className="flex-1 space-y-6">
+                  {/* Programs Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider">
+                      Programas
+                    </h3>
                     <div className="space-y-1">
-                      <p className="-mx-3 px-3 py-1 text-sm font-medium text-gray-500">Programas</p>
                       {programsMenu.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="-mx-3 block rounded-lg px-6 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                    
-                    {/* Other Navigation Items */}
-                    <div className="pt-4 space-y-2">
-                      {navigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          className="block rounded-lg px-4 py-3 text-base font-medium text-white hover:bg-white/10 transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item.name}
@@ -227,62 +233,84 @@ export function Header() {
                     </div>
                   </div>
                   
-                  {/* Mobile Auth */}
-                  <div className="py-6">
-                    {status === 'loading' ? (
-                      <div className="h-10 bg-gray-200 animate-pulse rounded-lg" />
-                    ) : session ? (
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-3 px-3">
-                          <Avatar className="h-10 w-10">
-                            <AvatarImage src={session.user?.image || ''} alt={session.user?.name || ''} />
-                            <AvatarFallback>
-                              {session.user?.name ? getUserInitials(session.user.name) : 'U'}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="text-base font-semibold text-gray-900">{session.user?.name}</p>
-                            <p className="text-sm text-gray-500">{session.user?.email}</p>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Link
-                            href="/dashboard"
-                            className="-mx-3 flex items-center rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            <User className="mr-3 h-5 w-5" />
-                            Dashboard
-                          </Link>
-                          <button
-                            onClick={handleSignOut}
-                            className="-mx-3 flex w-full items-center rounded-lg px-3 py-2 text-base font-semibold leading-7 text-brand-dark-gray hover:bg-brand-light-gray/50"
-                          >
-                            <LogOut className="mr-3 h-5 w-5" />
-                            Sair
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-2">
+                  {/* Other Navigation Items */}
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider">
+                      Navegação
+                    </h3>
+                    <div className="space-y-1">
+                      {navigation.map((item) => (
                         <Link
-                          href="/login"
-                          className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          key={item.name}
+                          href={item.href}
+                          className="block rounded-lg px-4 py-3 text-base font-medium text-white hover:bg-white/10 transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          Entrar
+                          {item.name}
                         </Link>
-                        <Link
-                          href="/signup"
-                          className="-mx-3 block rounded-lg bg-brand-metallic-gold px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-brand-metallic-gold/90"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Cadastrar
-                        </Link>
-                      </div>
-                    )}
+                      ))}
+                    </div>
                   </div>
+                </div>
+                
+                {/* Mobile Auth */}
+                <div className="border-t border-white/20 pt-6">
+                  {status === 'loading' ? (
+                    <div className="h-12 bg-white/10 animate-pulse rounded-lg" />
+                  ) : session ? (
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3 px-4">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage src={session.user?.image || ''} alt={session.user?.name || ''} />
+                          <AvatarFallback className="bg-white/20 text-white">
+                            {session.user?.name ? getUserInitials(session.user.name) : 'U'}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-base font-semibold text-white truncate">{session.user?.name}</p>
+                          <p className="text-sm text-white/70 truncate">{session.user?.email}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-1">
+                        <Link
+                          href="/dashboard"
+                          className="flex items-center rounded-lg px-4 py-3 text-base font-medium text-white hover:bg-white/10 transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <User className="mr-3 h-5 w-5" />
+                          Dashboard
+                        </Link>
+                        <button
+                          onClick={() => {
+                            handleSignOut()
+                            setMobileMenuOpen(false)
+                          }}
+                          className="flex w-full items-center rounded-lg px-4 py-3 text-base font-medium text-white/90 hover:bg-white/10 transition-colors"
+                        >
+                          <LogOut className="mr-3 h-5 w-5" />
+                          Sair
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <Link
+                        href="/login"
+                        className="block rounded-lg px-4 py-3 text-base font-semibold text-white hover:bg-white/10 transition-colors text-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Entrar
+                      </Link>
+                      <Link
+                        href="/signup"
+                        className="block rounded-lg px-4 py-3 text-base font-semibold bg-white/20 hover:bg-white/30 border border-white/30 text-white transition-colors text-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Cadastrar
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </SheetContent>

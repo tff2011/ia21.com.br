@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ParaEmpresasPage() {
   return (
-    <main className="min-h-screen theme-blue">
+    <main className="min-h-screen">
       <HeroSection />
       <ProgramsSection />
       <TestimonialsSection />
