@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getPostBySlug, getPublishedPosts } from '@/lib/content'
+import { getPostBySlug } from '@/lib/content'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -91,7 +92,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     "author": {
       "@type": "Person",
       "name": post.author.name,
-      "url": post.author.social?.website,
+      "url": post.author.social?.linkedin || post.author.social?.twitter,
       "image": post.author.avatar,
     },
     "publisher": {
@@ -129,18 +130,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               </Link>
               <span>/</span>
               <span>{post.title}</span>
-            </div>
-
-            <div className="space-y-6">
-              {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Link href="/conteudos" className="hover:text-primary transition-colors">
-                  Conteúdos
-                </Link>
-                <span>/</span>
-                <span>MDX</span>
-                <span>/</span>
-                <span>{post.title}</span>
             </div>
 
             <div className="space-y-6">
@@ -212,10 +201,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {/* Cover Image */}
         {post.image && (
           <div className="relative h-[50vh] bg-muted">
-            <img
+            <Image
               src={post.image}
               alt={post.title}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              priority
             />
           </div>
         )}
@@ -236,10 +227,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <div className="bg-muted/30 rounded-lg p-8">
             <div className="flex items-start gap-6">
               {post.author.avatar && (
-                <img
+                <Image
                   src={post.author.avatar}
                   alt={post.author.name}
-                  className="w-20 h-20 rounded-full object-cover"
+                  width={80}
+                  height={80}
+                  className="rounded-full object-cover"
                 />
               )}
               <div className="flex-1">
@@ -251,13 +244,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   </p>
                 )}
                 <div className="flex gap-4">
-                  {post.author.social?.website && (
-                    <Button asChild variant="outline" size="sm">
-                      <a href={post.author.social.website} target="_blank" rel="noopener noreferrer">
-                        Website
-                      </a>
-                    </Button>
-                  )}
                   {post.author.social?.twitter && (
                     <Button asChild variant="outline" size="sm">
                       <a href={post.author.social.twitter} target="_blank" rel="noopener noreferrer">

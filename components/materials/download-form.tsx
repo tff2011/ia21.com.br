@@ -72,7 +72,7 @@ export function DownloadForm({ materialId, materialTitle, onSuccess }: DownloadF
       // Clean phone number (remove non-digits)
       const cleanPhone = data.phone.replace(/\D/g, "")
 
-      const result = await createLeadMutation.mutateAsync({
+      await createLeadMutation.mutateAsync({
         ...data,
         phone: cleanPhone,
         materialId,

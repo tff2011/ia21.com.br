@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -56,10 +57,12 @@ export default function CarreirasPage() {
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/hero-carreiras.webp"
             alt="Equipe colaborativa trabalhando em ambiente de inovação tecnológica"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         </div>

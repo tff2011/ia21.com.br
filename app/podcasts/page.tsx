@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -91,10 +92,12 @@ export default function PodcastsPage() {
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/hero-podcasts.webp"
             alt="Modern workspace with headphones and sound waves visualization"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
         </div>

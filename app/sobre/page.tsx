@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Sobre - IA21 Educação',
@@ -12,10 +13,12 @@ export default function SobrePage() {
         {/* Hero Section */}
         <div className="relative mb-16 overflow-hidden rounded-3xl bg-gradient-to-r from-primary/10 to-secondary/10">
           <div className="absolute inset-0">
-            <img
+            <Image
               src="/hero-sobre-nos.webp"
               alt="Profissionais inovando com IA e educação digital"
-              className="w-full h-full object-cover opacity-40"
+              fill
+              className="object-cover opacity-40"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white/60 to-transparent" />
           </div>

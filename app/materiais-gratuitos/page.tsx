@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 import { useState } from "react"
 import Link from "next/link"
 import { api } from "@/lib/trpc-client"
@@ -47,10 +48,12 @@ export default function MateriaisGratuitosPage() {
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/hero-materiais-gratuitos.webp"
             alt="Modern digital workspace with floating geometric shapes representing downloadable content"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
         </div>

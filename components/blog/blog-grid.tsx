@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Calendar, User, Clock } from 'lucide-react'
+import { ArrowRight, Calendar, User } from 'lucide-react'
 import Link from 'next/link'
 import { sanityClient } from '@/lib/sanity.client'
 import { postsQuery } from '@/lib/sanity.queries'
@@ -138,7 +138,7 @@ const mockPosts = [
 export function BlogGrid() {
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  
 
   useEffect(() => {
     async function fetchPosts() {
@@ -147,7 +147,6 @@ export function BlogGrid() {
         setPosts(sanityPosts)
       } catch (error) {
         console.error('Error fetching posts from Sanity:', error)
-        setError('Falha ao carregar posts')
         // Use mock data as fallback
         setPosts(mockPosts)
       } finally {

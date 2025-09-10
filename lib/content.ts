@@ -1,10 +1,9 @@
-import { allPosts, allAuthors, allPages } from '../.velite'
-import type { Post, Author, Page } from '../.velite'
+import { posts as velitePosts, authors as veliteAuthors, pages as velitePages } from '../.velite'
 
 // Re-export all content collections with proper typing
-export const posts = allPosts as Post[]
-export const authors = allAuthors as Author[]
-export const pages = allPages as Page[]
+export const posts = velitePosts
+export const authors = veliteAuthors
+export const pages = velitePages
 
 // Helper functions for content queries
 export const getPostBySlug = (slug: string) => {
@@ -48,7 +47,9 @@ export const getRecentPosts = (limit = 10) => {
 }
 
 export const getPostsByAuthor = (authorSlug: string) => {
-  return posts.filter((post) => post.author.slug === authorSlug)
+  const author = authors.find((a) => a.slug === authorSlug)
+  if (!author) return []
+  return posts.filter((post) => post.author.name === author.name)
 }
 
 // Search functionality

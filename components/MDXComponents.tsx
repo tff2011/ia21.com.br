@@ -9,7 +9,6 @@ import {
   CheckCircle,
   AlertTriangle,
   Info,
-  Lightbulb,
   Quote,
   Code,
   ExternalLink,
@@ -22,7 +21,7 @@ type BaseProps = ComponentPropsWithoutRef<'div'>
 // Custom MDX components with Tailwind styling
 export const MDXComponents = {
   // Headings
-  h1: ({ className, ...props }: BaseProps) => (
+  h1: ({ className, ...props }: ComponentPropsWithoutRef<'h1'>) => (
     <h1
       className={cn(
         'mt-8 mb-4 text-3xl font-bold tracking-tight text-foreground scroll-m-20',
@@ -32,7 +31,7 @@ export const MDXComponents = {
     />
   ),
 
-  h2: ({ className, ...props }: BaseProps) => (
+  h2: ({ className, ...props }: ComponentPropsWithoutRef<'h2'>) => (
     <h2
       className={cn(
         'mt-6 mb-3 text-2xl font-bold tracking-tight text-foreground scroll-m-20',
@@ -42,7 +41,7 @@ export const MDXComponents = {
     />
   ),
 
-  h3: ({ className, ...props }: BaseProps) => (
+  h3: ({ className, ...props }: ComponentPropsWithoutRef<'h3'>) => (
     <h3
       className={cn(
         'mt-5 mb-2 text-xl font-bold tracking-tight text-foreground scroll-m-20',
@@ -52,7 +51,7 @@ export const MDXComponents = {
     />
   ),
 
-  h4: ({ className, ...props }: BaseProps) => (
+  h4: ({ className, ...props }: ComponentPropsWithoutRef<'h4'>) => (
     <h4
       className={cn(
         'mt-4 mb-2 text-lg font-semibold tracking-tight text-foreground scroll-m-20',
@@ -63,7 +62,7 @@ export const MDXComponents = {
   ),
 
   // Paragraph
-  p: ({ className, ...props }: BaseProps) => (
+  p: ({ className, ...props }: ComponentPropsWithoutRef<'p'>) => (
     <p
       className={cn(
         'mb-4 leading-7 text-foreground [&:not(:first-child)]:mt-6',
@@ -88,7 +87,7 @@ export const MDXComponents = {
   ),
 
   // Lists
-  ul: ({ className, ...props }: BaseProps) => (
+  ul: ({ className, ...props }: ComponentPropsWithoutRef<'ul'>) => (
     <ul
       className={cn(
         'my-6 ml-6 list-disc [&>li]:mt-2 text-foreground',
@@ -98,7 +97,7 @@ export const MDXComponents = {
     />
   ),
 
-  ol: ({ className, ...props }: BaseProps) => (
+  ol: ({ className, ...props }: ComponentPropsWithoutRef<'ol'>) => (
     <ol
       className={cn(
         'my-6 ml-6 list-decimal [&>li]:mt-2 text-foreground',
@@ -113,7 +112,7 @@ export const MDXComponents = {
   ),
 
   // Blockquote
-  blockquote: ({ className, ...props }: BaseProps) => (
+  blockquote: ({ className, ...props }: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote
       className={cn(
         'mt-6 mb-6 border-l-4 border-primary pl-6 italic text-muted-foreground',
@@ -239,31 +238,30 @@ export const MDXComponents = {
     <Badge variant={variant} className={cn('mx-1', className)} {...props} />
   ),
 
-  Button: ({
-    variant = 'default',
-    size = 'default',
-    href,
-    className,
-    ...props
-  }: ComponentPropsWithoutRef<'button'> & {
-    variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-    size?: 'default' | 'sm' | 'lg' | 'icon'
-    href?: string
-  }) => {
-    if (href) {
+  Button: (props: (
+    {
+      variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+      size?: 'default' | 'sm' | 'lg' | 'icon'
+      className?: string
+    } & (
+      (ComponentPropsWithoutRef<'button'> & { href?: undefined }) |
+      (ComponentPropsWithoutRef<'a'> & { href: string })
+    )
+  )) => {
+    const { variant = 'default', size = 'default', className } = props
+    if ('href' in props && props.href) {
+      const { href, children, ...rest } = props as ComponentPropsWithoutRef<'a'> & { href: string }
       return (
         <Button asChild variant={variant} size={size} className={className}>
-          <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-            {props.children}
+          <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+            {children}
             <ExternalLink className="ml-2 h-4 w-4" />
           </a>
         </Button>
       )
     }
-
-    return (
-      <Button variant={variant} size={size} className={className} {...props} />
-    )
+    const { children, ...rest } = props as ComponentPropsWithoutRef<'button'>
+    return <Button variant={variant} size={size} className={className} {...rest}>{children}</Button>
   },
 
   Separator: ({ className, ...props }: ComponentPropsWithoutRef<'hr'>) => (
@@ -271,7 +269,7 @@ export const MDXComponents = {
   ),
 
   // Enhanced blockquote with quote icon
-  Quote: ({ author, source, className, ...props }: BaseProps & {
+  Quote: ({ author, source, className, ...props }: ComponentPropsWithoutRef<'blockquote'> & {
     author?: string
     source?: string
   }) => (

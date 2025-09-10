@@ -1,5 +1,6 @@
 "use client"
 
+import Image from 'next/image'
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -122,10 +123,12 @@ export default function GlossarioPage() {
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/hero-glossario.webp"
             alt="Elegant library with floating books and golden light rays"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
         </div>
