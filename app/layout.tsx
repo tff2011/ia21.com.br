@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClientLayout } from "./layout-client";
 import "./globals.css";
+import { StructuredData } from "@/components/seo/structured-data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -85,6 +86,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <StructuredData />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <ClientLayout>
           {children}
