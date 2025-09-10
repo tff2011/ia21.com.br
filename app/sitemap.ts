@@ -1,27 +1,11 @@
 import { MetadataRoute } from 'next'
-import { sanityClient } from '@/lib/sanity.client'
-// import { postsQuery } from '@/lib/sanity.queries'
-
-interface Post {
-  slug: string
-  publishedAt: string
-}
+import { getPublishedPosts } from '@/lib/content'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://ia21.com.br'
 
-  // Fetch blog posts from Sanity
-  let posts: Post[] = []
-  try {
-    posts = await sanityClient.fetch(`
-      *[_type == "post" && defined(slug.current)] {
-        "slug": slug.current,
-        publishedAt
-      }
-    `)
-  } catch (error) {
-    console.error('Error fetching posts for sitemap:', error)
-  }
+  // Use local MDX (Velite) posts for sitemap
+  const posts = getPublishedPosts()
 
   // Static pages
   const staticPages = [
@@ -95,8 +79,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic blog post pages
   const blogPosts = posts.map((post) => ({
-    url: `${baseUrl}/conteudos/${post.slug}`,
-    lastModified: new Date(post.publishedAt),
+    url: `${baseUrl}/conteudos/${post.slugAsParams}`,
+    lastModified: new Date(post.date),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   } as const))
