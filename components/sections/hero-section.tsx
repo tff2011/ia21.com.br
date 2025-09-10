@@ -1,11 +1,25 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Play, Users, Award, BookOpen } from 'lucide-react'
+import { ArrowRight, Play } from 'lucide-react'
 
 export function HeroSection() {
+  const handleVideoPlay = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget
+    const videoContainer = button.parentElement?.parentElement
+    const video = videoContainer?.querySelector('video')
+    
+    if (video) {
+      // Hide play button and overlay
+      button.style.display = 'none'
+      button.parentElement!.style.display = 'none'
+      
+      // Show video controls and play
+      video.controls = true
+      video.play()
+    }
+  }
   return (
     <section className="relative bg-gradient-to-br from-background via-background to-muted/20 py-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -55,58 +69,44 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Visual */}
+          {/* Video */}
           <div className="relative">
-            <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-              <CardContent className="p-0">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <div className="h-32 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <BookOpen className="h-12 w-12 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold">Desenvolvimento Web</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Fundamentos e aplicações práticas
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="h-32 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Users className="h-12 w-12 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold">Mentoria Técnica</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Acompanhamento personalizado
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="h-32 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Award className="h-12 w-12 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold">Certificação</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Reconhecida pelo mercado
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="h-32 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Play className="h-12 w-12 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold">Projetos Reais</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Experiência prática garantida
-                      </p>
-                    </div>
-                  </div>
+            <div className="relative aspect-video bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl border border-primary/20 overflow-hidden shadow-2xl">
+              {/* Video Container */}
+              <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
+                {/* Play Button Overlay */}
+                <button 
+                  className="group relative z-10 w-20 h-20 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105"
+                  aria-label="Reproduzir vídeo"
+                  onClick={handleVideoPlay}
+                >
+                  <Play className="h-8 w-8 text-primary ml-1 group-hover:scale-110 transition-transform duration-300" fill="currentColor" />
+                </button>
+                
+                {/* Video Thumbnail/Placeholder */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+                  {/* Optional: Add video thumbnail image here */}
+                  {/* <img src="/video-thumbnail.jpg" alt="Vídeo de apresentação" className="w-full h-full object-cover" /> */}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+              
+              {/* Video Element (hidden initially, will be shown when play is clicked) */}
+              <video 
+                className="w-full h-full object-cover" 
+                controls={false}
+                poster="/video-thumbnail.jpg"
+                preload="metadata"
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+                <source src="/hero-video.webm" type="video/webm" />
+                Seu navegador não suporta reprodução de vídeo.
+              </video>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-4 right-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-white">
+                IA21 em Ação
+              </div>
+            </div>
           </div>
         </div>
       </div>
