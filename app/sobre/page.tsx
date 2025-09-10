@@ -61,12 +61,18 @@ export default function SobrePage() {
             <h2 className="text-3xl lg:text-4xl font-bold mb-12">Nossos Fundadores</h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl">👨‍💼</span>
+                <div className="w-20 h-20 mx-auto mb-4">
+                  <Image
+                    src="/images/authors/foto-perfil.jpeg"
+                    alt="Thiago Felizola Freires - Fundador da IA21 Educação"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Nome do Fundador 1</h3>
+                <h3 className="text-xl font-semibold mb-2">Thiago Felizola Freires</h3>
                 <p className="text-muted-foreground text-sm">
-                  Especialista em IA aplicada com experiência em empresas líderes de tecnologia brasileira.
+                  Especialista em Inteligência Artificial com foco em aplicações práticas para negócios e educação. Fundador da IA21 Educação.
                 </p>
               </div>
               <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">

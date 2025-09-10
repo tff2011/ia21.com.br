@@ -2,13 +2,10 @@
   {
     "name": "Thiago Felizola Freires",
     "slug": "thiago-felizola",
-    "avatar": "/images/authors/thiago-felizola.jpg",
+    "avatar": "/images/authors/foto-perfil.jpeg",
     "bio": "Especialista em Inteligência Artificial com foco em aplicações práticas para negócios e educação. Fundador da IA21 Educação.",
     "social": {
-      "twitter": "https://twitter.com/thiagofelizola",
-      "linkedin": "https://linkedin.com/in/thiagofelizola",
-      "github": "https://github.com/thiagofelizola",
-      "website": "https://thiagofelizola.com"
+      "linkedin": "https://linkedin.com/in/thiagofelizola"
     },
     "body": "const{Fragment:e,jsx:n,jsxs:i}=arguments[0];function _createMdxContent(a){const r={h2:\"h2\",li:\"li\",p:\"p\",ul:\"ul\",...a.components};return i(e,{children:[n(r.p,{children:\"Thiago Felizola Freires é especialista em Inteligência Artificial e fundador da IA21 Educação, dedicada a democratizar o conhecimento em tecnologias emergentes.\"}),\"\\n\",n(r.h2,{children:\"Experiência\"}),\"\\n\",i(r.ul,{children:[\"\\n\",n(r.li,{children:\"Especialista em aplicações práticas de IA para negócios\"}),\"\\n\",n(r.li,{children:\"Fundador da IA21 Educação\"}),\"\\n\",n(r.li,{children:\"Consultor em transformação digital\"}),\"\\n\",n(r.li,{children:\"Instrutor de cursos avançados em Machine Learning\"}),\"\\n\"]}),\"\\n\",n(r.h2,{children:\"Especialidades\"}),\"\\n\",i(r.ul,{children:[\"\\n\",n(r.li,{children:\"Machine Learning aplicado a negócios\"}),\"\\n\",n(r.li,{children:\"Automação inteligente de processos\"}),\"\\n\",n(r.li,{children:\"Análise preditiva e tomada de decisão\"}),\"\\n\",n(r.li,{children:\"Estratégias de adoção de IA em empresas\"}),\"\\n\"]})]})}return{default:function(e={}){const{wrapper:i}=e.components||{};return i?n(i,{...e,children:n(_createMdxContent,{...e})}):_createMdxContent(e)}};"
   }
