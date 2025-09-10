@@ -12,11 +12,14 @@ import Image from 'next/image'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Conteúdos | IA21 Educação',
+    title: 'Conteúdos',
     description: 'Artigos, tutoriais e insights sobre Inteligência Artificial, machine learning e tecnologias emergentes.',
     keywords: ['IA', 'Inteligência Artificial', 'Machine Learning', 'Educação', 'Tecnologia'],
+    alternates: {
+      canonical: '/conteudos',
+    },
     openGraph: {
-      title: 'Conteúdos | IA21 Educação',
+      title: 'Conteúdos',
       description: 'Artigos, tutoriais e insights sobre Inteligência Artificial, machine learning e tecnologias emergentes.',
       type: 'website',
     },

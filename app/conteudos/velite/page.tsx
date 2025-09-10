@@ -9,11 +9,18 @@ import { Calendar, Clock, User, ArrowRight, BookOpen, TrendingUp } from 'lucide-
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Conteúdos MDX | IA21 Educação',
+    title: 'Conteúdos MDX',
     description: 'Artigos exclusivos criados com tecnologia de ponta, focados em conteúdo de alta qualidade sobre IA e inovação.',
     keywords: ['IA', 'Conteúdo Exclusivo', 'MDX', 'Tecnologia', 'Inovação'],
+    alternates: {
+      canonical: '/conteudos/velite',
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
     openGraph: {
-      title: 'Conteúdos MDX | IA21 Educação',
+      title: 'Conteúdos MDX',
       description: 'Artigos exclusivos criados com tecnologia de ponta sobre IA e inovação.',
       type: 'website',
     },

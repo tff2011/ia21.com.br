@@ -117,23 +117,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
-    {
-      url: `${baseUrl}/login`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/signup`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
+    // Auth pages are typically not indexed
   ]
 
   // Dynamic blog post pages
   const blogPosts = posts.map((post) => ({
-    url: `${baseUrl}/conteudos/${post.slugAsParams}`,
+    url: `${baseUrl}/conteudos/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'weekly' as const,
     priority: 0.8,

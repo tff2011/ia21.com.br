@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     default: "IA21 Educação - Cursos de Desenvolvimento Web, React, Next.js",
     template: "%s | IA21 Educação"
   },
+  icons: "/favicon.png",
   description: "Plataforma educacional especializada em cursos de desenvolvimento web, React, Next.js, JavaScript e tecnologias modernas. Mentorias personalizadas e projetos reais.",
   keywords: [
     "cursos desenvolvimento web",
@@ -34,9 +35,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://ia21.com.br"),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "IA21 Educação - Cursos de Desenvolvimento Web e Tecnologia",
     description: "Transforme sua carreira com nossos cursos especializados em desenvolvimento web, React, Next.js e tecnologias modernas.",

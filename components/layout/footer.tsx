@@ -1,10 +1,14 @@
+
+
 'use client'
 
 import Link from 'next/link'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react'
 import { FaTiktok, FaYoutube } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import Image from 'next/image'
 
 const navigation = {
   solutions: [
@@ -57,6 +61,7 @@ interface FooterProps {
 
 export function Footer({ theme = 'gold' }: FooterProps) {
   const router = useRouter()
+  const [useFallback, setUseFallback] = useState(false)
 
   const handleNavigation = (href: string) => {
     // Scroll to top before navigation
@@ -94,8 +99,18 @@ export function Footer({ theme = 'gold' }: FooterProps) {
           {/* Brand and Description */}
           <div className="space-y-8">
             <div>
-              <Link href="/" className="text-3xl font-bold text-white">
-                IA21
+              <Link href="/" className="inline-flex items-center">
+                <Image
+                  src={useFallback ? '/logo-flat-black-nobg.png' : '/logo-flat-white-nobg.png'}
+                  alt="IA21 Educação"
+                  width={160}
+                  height={40}
+                  className={`h-10 w-auto ${useFallback ? 'invert' : ''}`}
+                  priority
+                  quality={95}
+                  sizes="160px"
+                  onError={() => setUseFallback(true)}
+                />
               </Link>
               <p className="mt-4 text-sm leading-6 text-gray-300">
                 Transformando o futuro através da educação tecnológica. 

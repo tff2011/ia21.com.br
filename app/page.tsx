@@ -55,7 +55,7 @@ export default function HomePage() {
     "name": "IA21 Educação",
     "description": "Plataforma educacional especializada em cursos de desenvolvimento web, React, Next.js e tecnologias modernas",
     "url": "https://ia21.com.br",
-    "logo": "https://ia21.com.br/logo.png",
+    "logo": "https://ia21.com.br/logo-flat-gold-nobg.png",
     "sameAs": [
       "https://twitter.com/ia21educacao",
       "https://linkedin.com/company/ia21educacao"

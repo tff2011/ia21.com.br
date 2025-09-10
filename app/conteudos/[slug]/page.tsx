@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const modifiedTime = publishedTime
 
   return {
-    title: `${post.title} | IA21 Educação`,
+    title: post.title,
     description: post.excerpt || `Aprenda sobre ${post.tags?.slice(0, 3).join(', ')} com este artigo detalhado da IA21 Educação.`,
     keywords: post.tags,
     authors: [{ name: post.author.name }],
@@ -82,6 +82,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     notFound()
   }
 
+  const estimatedReadTime = Math.ceil(post.body.length / 1000) + 2
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -90,6 +92,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     "image": post.image,
     "datePublished": post.date,
     "dateModified": post.date,
+    "timeRequired": `PT${estimatedReadTime}M`,
     "author": {
       "@type": "Person",
       "name": post.author.name,
@@ -101,7 +104,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       "name": "IA21 Educação",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://ia21.com.br/logo.png"
+        "url": "https://ia21.com.br/logo-flat-gold-nobg.png"
       }
     },
     "mainEntityOfPage": {
@@ -112,13 +115,41 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     "articleSection": post.categories[0],
   }
 
-  const estimatedReadTime = Math.ceil(post.body.length / 1000) + 2
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {/* Breadcrumbs structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Início",
+                "item": "https://ia21.com.br/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Conteúdos",
+                "item": "https://ia21.com.br/conteudos"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": post.title,
+                "item": `https://ia21.com.br/conteudos/${post.slug}`
+              }
+            ]
+          })
+        }}
       />
       
       <article className="min-h-screen">
