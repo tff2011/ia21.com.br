@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Calendar, Clock, User, ArrowRight, Search, BookOpen } from 'lucide-react'
+import Image from 'next/image'
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,10 +44,10 @@ export default async function ConteudosPage({
         post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
         post.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()))
 
-      const matchesCategory = !category ||
+      const matchesCategory = !category || category === 'todas' ||
         post.categories.some(cat => cat.toLowerCase() === category.toLowerCase())
 
-      const matchesTag = !tag ||
+      const matchesTag = !tag || tag === 'todas' ||
         post.tags.some(postTag => postTag.toLowerCase() === tag.toLowerCase())
 
       return matchesSearch && matchesCategory && matchesTag
@@ -80,17 +81,59 @@ export default async function ConteudosPage({
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <div className="border-b">
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-              Conteúdos sobre IA
+      {/* Hero Section with Background Image */}
+      <div className="relative min-h-[70vh] flex items-center">
+        <div className="absolute inset-0">
+          <Image
+            src="/hero-conteudos-clean.webp"
+            alt="Conteúdos sobre IA - Visual representation of artificial intelligence, neural networks, and technological innovation"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center space-y-6 max-w-4xl mx-auto">
+            <Badge variant="secondary" className="px-4 py-2 text-white border-white/20 bg-white/10 backdrop-blur-sm" role="banner">
+              📚 Conteúdos IA21
+            </Badge>
+            <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+              Conteúdos sobre <span className="text-primary">IA</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Artigos, tutoriais e insights sobre Inteligência Artificial, machine learning
               e tecnologias emergentes para transformar seu negócio e carreira.
             </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mt-8">
+              <div className="flex items-center gap-3 text-white/90">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                  <BookOpen className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold">Artigos Especializados</div>
+                  <div className="text-sm text-white/70">Conteúdo de qualidade</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-white/90">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                  <User className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold">Especialistas</div>
+                  <div className="text-sm text-white/70">Autores qualificados</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-white/90">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                  <Search className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold">Busca Avançada</div>
+                  <div className="text-sm text-white/70">Encontre facilmente</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,7 +156,7 @@ export default async function ConteudosPage({
                 <SelectValue placeholder="Categoria" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todas as categorias</SelectItem>
+                <SelectItem value="todas">Todas as categorias</SelectItem>
                 {allCategories.map((cat) => (
                   <SelectItem key={cat.slug} value={cat.slug}>
                     {cat.title}
@@ -127,7 +170,7 @@ export default async function ConteudosPage({
                 <SelectValue placeholder="Tag" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Todas as tags</SelectItem>
+                <SelectItem value="todas">Todas as tags</SelectItem>
                 {allTags.map((tagName) => (
                   <SelectItem key={tagName} value={tagName.toLowerCase()}>
                     {tagName}
@@ -178,7 +221,7 @@ export default async function ConteudosPage({
                     </div>
 
                     <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
-                      <Link href={`/conteudos/${post.slugAsParams}`}>
+                      <Link href={`/conteudos/${post.slug}`}>
                         {post.title}
                       </Link>
                     </CardTitle>
@@ -213,7 +256,7 @@ export default async function ConteudosPage({
                     </div>
 
                     <Button asChild variant="ghost" className="w-full justify-between group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      <Link href={`/conteudos/${post.slugAsParams}`}>
+                      <Link href={`/conteudos/${post.slug}`}>
                         Ler artigo
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>

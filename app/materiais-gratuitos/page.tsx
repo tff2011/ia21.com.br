@@ -7,6 +7,18 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Download, FileText, Users, TrendingUp } from "lucide-react"
+import { CTASection } from "@/components/sections/cta-section"
+
+interface Material {
+  id: string
+  slug: string
+  title: string
+  description?: string | null
+  excerpt?: string | null
+  fileSize?: string | null
+  category?: string | null
+  downloadCount: number
+}
 
 // Page-level metadata moved to route layout to support Client Component
 
@@ -16,12 +28,12 @@ export default function MateriaisGratuitosPage() {
   const { data: materials, isLoading } = api.material.list.useQuery()
 
   const filteredMaterials = selectedCategory
-    ? materials?.filter(material => material.category === selectedCategory)
+    ? materials?.filter((material: Material) => material.category === selectedCategory)
     : materials
 
   const categories = Array.from(
-    new Set(materials?.map(material => material.category).filter(Boolean))
-  )
+    new Set(materials?.map((material: Material) => material.category).filter(Boolean) as string[])
+  ) as string[]
 
   if (isLoading) {
     return (
@@ -142,7 +154,7 @@ export default function MateriaisGratuitosPage() {
           {/* Materials Grid */}
           {filteredMaterials && filteredMaterials.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredMaterials.map((material) => (
+              {filteredMaterials.map((material: Material) => (
                 <Card key={material.id} className="h-full flex flex-col hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex justify-between items-start mb-2">
@@ -200,28 +212,7 @@ export default function MateriaisGratuitosPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pronto para acelerar sua carreira?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Junte-se à nossa comunidade de profissionais que estão transformando suas carreiras com IA.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/programas">
-              <Button size="lg" variant="secondary">
-                Ver Programas
-              </Button>
-            </Link>
-            <Link href="/contato">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
-                Falar com Especialista
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CTASection />
     </div>
   )
 }

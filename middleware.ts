@@ -15,6 +15,6 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/studio/:path*',
-    '/api/trpc/:path*',
+    // Removido '/api/trpc/:path*' para permitir procedures públicas
   ],
 }

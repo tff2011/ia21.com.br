@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: post.image ? [post.image] : [],
     },
     alternates: {
-      canonical: `/conteudos/${post.slugAsParams}`,
+      canonical: `/conteudos/${post.slug}`,
     },
   }
 }
@@ -105,7 +105,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://ia21.com.br/conteudos/${post.slugAsParams}`
+      "@id": `https://ia21.com.br/conteudos/${post.slug}`
     },
     "keywords": post.tags,
     "articleSection": post.categories[0],

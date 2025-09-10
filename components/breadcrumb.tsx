@@ -15,7 +15,7 @@ import { ChevronRight, Home } from 'lucide-react'
 
 // Mapeamento de rotas para nomes legíveis e SEO
 const routeLabels: Record<string, string> = {
-  '': 'Inicio',
+  '': 'Home',
   'programas': 'Programas',
   'para-voce': 'Para Você',
   'para-empresas': 'Para Empresas',
@@ -32,6 +32,12 @@ const routeLabels: Record<string, string> = {
   'ajuda': 'Central de Ajuda',
   'contato': 'Contato',
   'suporte': 'Suporte Técnico',
+  'glossario': 'Glossário',
+  'materiais-gratuitos': 'Materiais Gratuitos',
+  'podcast': 'Podcasts',
+  'podcasts': 'Podcasts',
+  'materiais': 'Materiais',
+  'studio': 'Studio',
 }
 
 // Meta descriptions para SEO
@@ -78,6 +84,10 @@ const formatDynamicRoute = (segment: string, index: number, allSegments: string[
           return 'Artigo'
         case 'dashboard':
           return 'Seção'
+        case 'glossario':
+          return 'Glossário'
+        case 'materiais-gratuitos':
+          return 'Materiais Gratuitos'
         default:
           return 'Página'
       }
