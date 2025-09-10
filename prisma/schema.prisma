@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication and roles
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String?
+  image     String?
+  role      Role     @default(visitor)
+  companyId String?
+  company   Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  enrollments Enrollment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Company model for enterprise clients
+model Company {
+  id           String @id @default(cuid())
+  name         String
+  contactEmail String?
+  users        User[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("companies")
+}
+
+// Program model for courses/offerings
+model Program {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  title     String
+  summary   String
+  format    String    // online, presencial, híbrido
+  level     String    // básico, intermediário, avançado
+  duration  String    // "4 semanas", "8 horas", etc.
+  price     Float?
+  theme     Theme     @default(gold)
+  published Boolean   @default(false)
+  enrollments Enrollment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("programs")
+}
+
+// Enrollment model for user-program relationships
+model Enrollment {
+  id        String            @id @default(cuid())
+  userId    String
+  programId String
+  status    EnrollmentStatus  @default(pending)
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  program   Program           @relation(fields: [programId], references: [id], onDelete: Cascade)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@unique([userId, programId])
+
+  @@map("enrollments")
+}
+
+// Enums
+enum Role {
+  visitor
+  aluno
+  mentor
+  empresa_admin
+  staff
+}
+
+enum Theme {
+  gold
+  blue
+}
+
+enum EnrollmentStatus {
+  pending
+  approved
+  rejected
+  cancelled
+}
