@@ -1,6 +1,7 @@
 "use client"
 
 import { api } from "@/lib/trpc-client"
+import Image from "next/image"
 
 import { useState } from "react"
 import { useParams } from "next/navigation"
@@ -9,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DownloadForm } from "@/components/materials/download-form"
-import { ArrowLeft, FileText, Download } from "lucide-react"
+import { FileText, Download } from "lucide-react"
 import { notFound } from "next/navigation"
 
 export default function MaterialDownloadPage() {
@@ -56,18 +57,8 @@ export default function MaterialDownloadPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      {/* Header */}
-      <section className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-6">
-          <Link href="/materiais-gratuitos" className="inline-flex items-center text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar para Materiais Gratuitos
-          </Link>
-        </div>
-      </section>
-
       {/* Content */}
-      <section className="py-16">
+      <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Material Info */}
@@ -193,16 +184,31 @@ export default function MaterialDownloadPage() {
       </section>
 
       {/* Related Materials CTA */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">
-            Explore mais conteúdos gratuitos
+      <section className="relative text-white py-16 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/cta-explore-conteudos.webp"
+            alt="Elementos de transformação digital: laptop, dados e gráficos de IA, livros digitais flutuando com ícones de tecnologia"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6 leading-tight">
+            Explore mais <span className="text-white/90">conteúdos gratuitos</span>
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Temos diversos materiais preparados especialmente para acelerar sua transformação digital.
+
+          {/* Elegant Divider */}
+          <div className="w-20 h-0.5 bg-gradient-to-r from-white/60 via-white to-white/60 rounded-full mx-auto mt-4 mb-6"></div>
+
+          <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Temos diversos materiais preparados especialmente para
+            <span className="font-bold text-white"> acelerar sua transformação digital</span>.
           </p>
           <Link href="/materiais-gratuitos">
-            <Button size="lg" variant="secondary">
+            <Button size="lg" className="bg-white text-[#0F1C3F] hover:bg-white/90 font-semibold px-8 py-6 text-base">
               Ver Todos os Materiais
             </Button>
           </Link>

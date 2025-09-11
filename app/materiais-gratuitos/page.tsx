@@ -61,8 +61,8 @@ export default function MateriaisGratuitosPage() {
       <div className="relative min-h-[70vh] flex items-center">
         <div className="absolute inset-0">
           <Image
-            src="/hero-materiais-gratuitos.webp"
-            alt="Modern digital workspace with floating geometric shapes representing downloadable content"
+            src="/hero-materiais-gratuitos-novo.webp"
+            alt="Mesa de trabalho com laptop mostrando dashboards de IA, e-books digitais flutuando, templates e guias práticos sobre inteligência artificial"
             fill
             className="object-cover"
             priority
