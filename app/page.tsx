@@ -3,7 +3,6 @@ import { HeroSection } from '@/components/sections/hero-section'
 import { CompaniesCarousel } from '@/components/sections/companies-carousel'
 import { ProgramsSection } from '@/components/sections/programs-section'
 import { PhilosophyQuote } from '@/components/sections/philosophy-quote'
-import { BlogSection } from '@/components/sections/blog-section'
 import { FAQSection } from '@/components/sections/faq-section'
 import { CTASection } from '@/components/sections/cta-section'
 
@@ -105,7 +104,6 @@ export default function HomePage() {
         <CompaniesCarousel theme="gold" />
         <PhilosophyQuote context="b2c" />
         <ProgramsSection />
-        <BlogSection />
         <FAQSection />
         <CTASection />
       </main>
