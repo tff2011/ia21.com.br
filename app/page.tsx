@@ -103,7 +103,7 @@ export default function HomePage() {
       <main className="min-h-screen">
         <HeroSection />
         <CompaniesCarousel theme="gold" />
-        <PhilosophyQuote />
+        <PhilosophyQuote context="b2c" />
         <ProgramsSection />
         <BlogSection />
         <FAQSection />

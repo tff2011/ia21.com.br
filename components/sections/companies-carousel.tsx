@@ -123,29 +123,6 @@ export function CompaniesCarousel({ theme = 'gold' }: { theme?: 'gold' | 'blue' 
       </div>
 
     </section>
-
-      {/* Elegant Divider */}
-      <div className="relative w-full flex justify-center py-4">
-        <div className="relative">
-          {/* Main divider line */}
-          <div className={`w-32 sm:w-48 h-px bg-gradient-to-r from-transparent ${colors.dividerColor} to-transparent opacity-60`}></div>
-          
-          {/* Central ornament */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className={`w-2 h-2 bg-gradient-to-br ${colors.logoGradientFrom} ${colors.logoGradientTo} rounded-full shadow-sm`}>
-              <div className={`w-full h-full bg-gradient-to-tr ${colors.logoGradientFrom} ${colors.logoGradientTo} rounded-full opacity-70`}></div>
-            </div>
-          </div>
-          
-          {/* Side ornaments */}
-          <div className="absolute top-1/2 left-6 transform -translate-y-1/2">
-            <div className={`w-1 h-1 bg-[${colors.primary}] rounded-full opacity-40`}></div>
-          </div>
-          <div className="absolute top-1/2 right-6 transform -translate-y-1/2">
-            <div className={`w-1 h-1 bg-[${colors.primary}] rounded-full opacity-40`}></div>
-          </div>
-        </div>
-      </div>
     </>
   )
 }
