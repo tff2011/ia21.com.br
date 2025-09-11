@@ -16,7 +16,7 @@ export default function ParaEmpresasPage() {
       <HeroSectionB2B />
       <CompaniesCarousel theme="blue" />
       <ProgramsSection />
-      <TestimonialsSection />
+      <TestimonialsSection theme="blue" />
       <CTASection />
     </main>
   )

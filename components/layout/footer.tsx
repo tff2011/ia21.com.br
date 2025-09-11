@@ -9,6 +9,7 @@ import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react'
 import { FaTiktok, FaYoutube } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 import Image from 'next/image'
+import { api } from '@/lib/trpc-client'
 
 const navigation = {
   solutions: [
@@ -62,12 +63,56 @@ interface FooterProps {
 export function Footer({ theme = 'gold' }: FooterProps) {
   const router = useRouter()
   const [useFallback, setUseFallback] = useState(false)
+  const [newsletterData, setNewsletterData] = useState({
+    name: '',
+    email: ''
+  })
+  const [showNameField, setShowNameField] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const newsletterSubscribe = api.newsletter.subscribe.useMutation({
+    onSuccess: (data) => {
+      setMessage(data.message)
+      setNewsletterData({ name: '', email: '' })
+      setShowNameField(false)
+      setIsSubmitting(false)
+    },
+    onError: (error) => {
+      setMessage(error.message)
+      setIsSubmitting(false)
+    }
+  })
 
   const handleNavigation = (href: string) => {
     // Scroll to top before navigation
     window.scrollTo({ top: 0, behavior: 'instant' })
     // Navigate to the page
     router.push(href)
+  }
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!newsletterData.email.trim()) return
+    
+    if (!showNameField) {
+      setShowNameField(true)
+      return
+    }
+
+    if (!newsletterData.name.trim()) {
+      setMessage('Por favor, preencha seu nome.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setMessage('')
+    newsletterSubscribe.mutate(newsletterData)
+  }
+
+  const handleInputChange = (field: 'name' | 'email', value: string) => {
+    setNewsletterData(prev => ({ ...prev, [field]: value }))
+    if (message) setMessage('')
   }
 
   const themeClasses = {
@@ -206,32 +251,62 @@ export function Footer({ theme = 'gold' }: FooterProps) {
           <div className="lg:flex lg:items-center lg:justify-between">
             <div>
               <h3 className="text-sm font-semibold leading-6 text-white">
-                Receba nossas novidades
+                Receba nossas novidades sobre IA
               </h3>
               <p className="mt-2 text-sm leading-6 text-gray-300">
-                Fique por dentro das últimas tendências em tecnologia e educação.
+                Fique por dentro das últimas tendências em inteligência artificial e educação tecnológica.
               </p>
+              {message && (
+                <p className={`mt-2 text-sm ${message.includes('sucesso') ? 'text-green-400' : 'text-red-400'}`}>
+                  {message}
+                </p>
+              )}
             </div>
-            <form className="mt-6 sm:flex sm:max-w-md lg:mt-0">
-              <label htmlFor="email-address" className="sr-only">
-                Endereço de email
-              </label>
-              <input
-                type="email"
-                name="email-address"
-                id="email-address"
-                autoComplete="email"
-                required
-                className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:w-64 sm:text-sm sm:leading-6`}
-                placeholder="Seu email"
-              />
-              <div className="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
-                <button
-                  type="submit"
-                  className={`flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${currentTheme.button}`}
-                >
-                  Inscrever-se
-                </button>
+            <form onSubmit={handleEmailSubmit} className="mt-6 sm:flex sm:max-w-md lg:mt-0">
+              <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex">
+                {showNameField && (
+                  <div>
+                    <label htmlFor="newsletter-name" className="sr-only">
+                      Nome
+                    </label>
+                    <input
+                      type="text"
+                      name="newsletter-name"
+                      id="newsletter-name"
+                      autoComplete="name"
+                      required
+                      value={newsletterData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:w-48 sm:text-sm sm:leading-6`}
+                      placeholder="Seu nome"
+                    />
+                  </div>
+                )}
+                <div>
+                  <label htmlFor="newsletter-email" className="sr-only">
+                    Endereço de email
+                  </label>
+                  <input
+                    type="email"
+                    name="newsletter-email"
+                    id="newsletter-email"
+                    autoComplete="email"
+                    required
+                    value={newsletterData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:w-64 sm:text-sm sm:leading-6`}
+                    placeholder="Seu email"
+                  />
+                </div>
+                <div className="mt-4 sm:mt-0 sm:flex-shrink-0">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${currentTheme.button}`}
+                  >
+                    {isSubmitting ? 'Enviando...' : showNameField ? 'Confirmar' : 'Continuar'}
+                  </button>
+                </div>
               </div>
             </form>
           </div>

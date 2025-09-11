@@ -4,6 +4,7 @@ import { enrollmentRouter } from './enrollment'
 import { userRouter } from './user'
 import { leadRouter } from './lead'
 import { materialRouter } from './material'
+import { newsletterRouter } from './newsletter'
 
 export const appRouter = router({
   program: programRouter,
@@ -11,6 +12,7 @@ export const appRouter = router({
   user: userRouter,
   lead: leadRouter,
   material: materialRouter,
+  newsletter: newsletterRouter,
 })
 
 export type AppRouter = typeof appRouter

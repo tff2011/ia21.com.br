@@ -12,7 +12,11 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-export function TestimonialsSection() {
+interface TestimonialsSectionProps {
+  theme?: 'gold' | 'blue'
+}
+
+export function TestimonialsSection({ theme = 'gold' }: TestimonialsSectionProps) {
   const prevRef = useRef<HTMLButtonElement>(null)
   const nextRef = useRef<HTMLButtonElement>(null)
 
@@ -79,12 +83,29 @@ export function TestimonialsSection() {
     },
   ]
 
+  const themeClasses = {
+    gold: {
+      accent: 'text-primary',
+      star: 'fill-primary text-primary',
+      primaryBadge: 'bg-primary/10 text-primary border-primary/20',
+      secondaryBadge: 'bg-accent/10 text-accent border-accent/20'
+    },
+    blue: {
+      accent: 'text-primary',
+      star: 'fill-primary text-primary',
+      primaryBadge: 'bg-primary/10 text-primary border-primary/20',
+      secondaryBadge: 'bg-accent/10 text-accent border-accent/20'
+    }
+  }
+
+  const currentTheme = themeClasses[theme]
+
   return (
     <section className="py-20 px-4 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            O que nossos <span className="text-primary">alunos dizem</span>
+            O que nossos <span className={currentTheme.accent}>alunos dizem</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Histórias reais de transformação através da educação tecnológica
@@ -104,7 +125,7 @@ export function TestimonialsSection() {
 
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-brand-metallic-gold text-brand-metallic-gold" />
+                    <Star key={i} className={`h-4 w-4 ${currentTheme.star}`} />
                   ))}
                 </div>
 
@@ -127,9 +148,9 @@ export function TestimonialsSection() {
                 <Badge
                   variant="secondary"
                   className={`absolute top-4 right-4 ${
-                    testimonial.theme === 'gold'
-                      ? 'bg-[#C8A64B]/10 text-[#C8A64B] border-[#C8A64B]/20'
-                      : 'bg-[#1C3B6F]/10 text-[#1C3B6F] border-[#1C3B6F]/20'
+                    testimonial.theme === theme
+                      ? currentTheme.primaryBadge
+                      : currentTheme.secondaryBadge
                   }`}
                 >
                   {testimonial.theme === 'gold' ? 'Para Você' : 'Para Empresas'}
@@ -189,7 +210,7 @@ export function TestimonialsSection() {
 
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-brand-metallic-gold text-brand-metallic-gold" />
+                        <Star key={i} className={`h-4 w-4 ${currentTheme.star}`} />
                       ))}
                     </div>
 
@@ -212,9 +233,9 @@ export function TestimonialsSection() {
                     <Badge
                       variant="secondary"
                       className={`absolute top-4 right-4 ${
-                        testimonial.theme === 'gold'
-                          ? 'bg-[#C8A64B]/10 text-[#C8A64B] border-[#C8A64B]/20'
-                          : 'bg-[#1C3B6F]/10 text-[#1C3B6F] border-[#1C3B6F]/20'
+                        testimonial.theme === theme
+                          ? currentTheme.primaryBadge
+                          : currentTheme.secondaryBadge
                       }`}
                     >
                       {testimonial.theme === 'gold' ? 'Para Você' : 'Para Empresas'}
