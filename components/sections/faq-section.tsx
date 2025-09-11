@@ -10,6 +10,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { HelpCircle, Users, BookOpen, CreditCard, Shield, Headphones } from "lucide-react"
+import { TechCarousel } from "./tech-carousel"
 
 export function FAQSection() {
   const baseId = useId()
@@ -140,36 +141,10 @@ export function FAQSection() {
           </Card>
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
-            <CardContent className="p-8">
-              <h3 className="text-xl font-semibold mb-2">Não encontrou sua resposta?</h3>
-              <p className="text-muted-foreground mb-6">
-                Nossa equipe está pronta para ajudar. Entre em contato e responderemos
-                sua pergunta o mais breve possível.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="mailto:suporte@ia21.com.br"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-colors"
-                >
-                  <HelpCircle className="w-4 h-4 mr-2" />
-                  Falar com Suporte
-                </a>
-                <a
-                  href="https://wa.me/5511999999999"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary rounded-md font-medium hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  WhatsApp
-                </a>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
+      
+      {/* Tech Carousel */}
+      <TechCarousel />
     </section>
   )
 }

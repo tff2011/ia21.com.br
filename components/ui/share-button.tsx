@@ -31,7 +31,6 @@ export function ShareButton({
 
   const encodedTitle = encodeURIComponent(title)
   const encodedUrl = encodeURIComponent(url)
-  const encodedDescription = encodeURIComponent(description)
 
   const shareLinks = {
     x: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}&via=ia21educacao`,

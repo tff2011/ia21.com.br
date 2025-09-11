@@ -5,6 +5,7 @@ import { ProgramsSection } from '@/components/sections/programs-section'
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { CTASection } from '@/components/sections/cta-section'
 import { PhilosophyQuote } from '@/components/sections/philosophy-quote'
+import { TechCarousel } from '@/components/sections/tech-carousel'
 
 export const metadata: Metadata = {
   title: 'Para Empresas - IA21 Educação',
@@ -18,6 +19,7 @@ export default function ParaEmpresasPage() {
       <CompaniesCarousel theme="blue" />
       <PhilosophyQuote context="b2b" />
       <ProgramsSection />
+      <TechCarousel />
       <TestimonialsSection theme="blue" />
       <CTASection />
     </main>

@@ -8,7 +8,7 @@ import { renderPrecompiledMDX } from '@/lib/mdx-renderer'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Calendar, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-react'
+import { Calendar, Clock, User, ArrowLeft } from 'lucide-react'
 import { MDXComponents } from '@/components/MDXComponents'
 import { ShareButton } from '@/components/ui/share-button'
 
