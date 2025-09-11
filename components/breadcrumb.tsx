@@ -15,7 +15,7 @@ import { ChevronRight, Home } from 'lucide-react'
 
 // Mapeamento de rotas para nomes legíveis e SEO
 const routeLabels: Record<string, string> = {
-  '': 'Home',
+  '': 'Início',
   'programas': 'Programas',
   'para-voce': 'Para Você',
   'para-empresas': 'Para Empresas',
@@ -121,9 +121,9 @@ export default function BreadcrumbComponent() {
   const breadcrumbs = React.useMemo(() => {
     const crumbs: Array<{ name: string; href: string; isLast: boolean }> = []
 
-    // Sempre começa com Home
+    // Sempre começa com Início
     crumbs.push({
-      name: routeLabels[''] || 'Home',
+      name: routeLabels[''] || 'Início',
       href: '/',
       isLast: pathSegments.length === 0,
     })

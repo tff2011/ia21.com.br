@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { HeroSection } from '@/components/sections/hero-section'
 import { CompaniesCarousel } from '@/components/sections/companies-carousel'
 import { ProgramsSection } from '@/components/sections/programs-section'
+import { PhilosophyQuote } from '@/components/sections/philosophy-quote'
 import { BlogSection } from '@/components/sections/blog-section'
 import { FAQSection } from '@/components/sections/faq-section'
 import { CTASection } from '@/components/sections/cta-section'
@@ -102,6 +103,7 @@ export default function HomePage() {
       <main className="min-h-screen">
         <HeroSection />
         <CompaniesCarousel theme="gold" />
+        <PhilosophyQuote />
         <ProgramsSection />
         <BlogSection />
         <FAQSection />

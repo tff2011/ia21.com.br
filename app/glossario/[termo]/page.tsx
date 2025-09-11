@@ -67,7 +67,7 @@ export default async function TermPage({ params }: TermPageProps) {
                 {
                   "@type": "ListItem",
                   "position": 1,
-                  "name": "Home",
+                  "name": "Início",
                   "item": "https://ia21.com.br"
                 },
                 {

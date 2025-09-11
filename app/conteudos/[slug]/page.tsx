@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Calendar, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-react'
 import { MDXComponents } from '@/components/MDXComponents'
+import { ShareButton } from '@/components/ui/share-button'
 
 
 async function getPost(slug: string) {
@@ -156,33 +157,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {/* Header */}
         <div className="border-b">
           <div className="max-w-4xl mx-auto px-4 py-8">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-              <Link href="/conteudos" className="hover:text-primary transition-colors">
-                Conteúdos
-              </Link>
-              <span>/</span>
-              <span>{post.title}</span>
-            </div>
-
             <div className="space-y-6">
-              {/* Categories and Tags */}
-              <div className="flex flex-wrap items-center gap-2">
-                {post.categories.map((category) => (
-                  <Badge key={category} variant="secondary" className="text-xs">
-                    {category}
-                  </Badge>
-                ))}
-                <Badge variant="default" className="text-xs bg-primary/10 text-primary border-primary/20">
-                  <BookOpen className="h-3 w-3 mr-1" />
-                  Conteúdo MDX
-                </Badge>
-                {post.tags.slice(0, 3).map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-
               {/* Title */}
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 {post.title}
@@ -215,16 +190,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
               {/* Actions */}
               <div className="flex items-center gap-4">
-                <Button asChild variant="outline" size="sm">
-                  <Link href="/conteudos">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Voltar aos artigos
-                  </Link>
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Share2 className="mr-2 h-4 w-4" />
-                  Compartilhar
-                </Button>
+                <ShareButton 
+                  title={post.title}
+                  url={`https://ia21.com.br/conteudos/${post.slug}`}
+                  description={post.excerpt || `Confira este artigo sobre ${post.title} no blog da IA21 Educação`}
+                  size="sm"
+                  variant="outline"
+                />
               </div>
             </div>
           </div>
@@ -247,6 +219,33 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="prose prose-lg max-w-none">
             {renderPrecompiledMDX(post.body, MDXComponents)}
+          </div>
+        </div>
+
+        {/* Navigation and Tags */}
+        <div className="max-w-4xl mx-auto px-4 pb-12">
+          <div className="space-y-6">
+            {/* Back Button */}
+            <div className="flex justify-center">
+              <Button asChild variant="outline" size="default">
+                <Link href="/conteudos">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Voltar aos artigos
+                </Link>
+              </Button>
+            </div>
+
+            {/* Tags */}
+            <div className="text-center">
+              <h3 className="text-sm font-medium text-muted-foreground mb-4">Tags relacionadas</h3>
+              <div className="flex flex-wrap justify-center gap-2">
+                {post.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="text-sm px-3 py-1">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 

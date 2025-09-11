@@ -82,6 +82,24 @@ export default async function ConteudosPage({
     return Math.ceil(content.length / 1000) + 2 // Base time for MDX posts
   }
 
+  const abbreviateName = (fullName: string) => {
+    const parts = fullName.trim().split(' ')
+    if (parts.length <= 2) return fullName
+    
+    const firstName = parts[0]
+    const lastName = parts[parts.length - 1]
+    
+    // Se o nome tem mais de 2 partes, abrevia as do meio
+    if (parts.length > 2) {
+      const middleInitials = parts.slice(1, -1)
+        .map(name => name.charAt(0).toUpperCase())
+        .join('. ')
+      return `${firstName} ${middleInitials}. ${lastName}`
+    }
+    
+    return fullName
+  }
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
@@ -207,27 +225,59 @@ export default async function ConteudosPage({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post) => (
-                <Card key={post.slug} className="group hover:shadow-lg transition-shadow">
-                  <CardHeader className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
+                <Card key={post.slug} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+                  {/* Image Section */}
+                  <div className="relative h-48 bg-muted overflow-hidden">
+                    {post.image ? (
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
+                        <BookOpen className="h-12 w-12 text-primary/50" />
+                      </div>
+                    )}
+                    
+                    {/* Badges Overlay */}
+                    <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                       {post.categories.slice(0, 2).map((category) => (
-                        <Badge key={category} variant="secondary" className="text-xs">
+                        <Badge key={category} variant="secondary" className="text-xs bg-white/90 backdrop-blur-sm">
                           {category}
                         </Badge>
                       ))}
                       {post.featured && (
-                        <Badge variant="default" className="text-xs bg-primary/10 text-primary border-primary/20">
+                        <Badge variant="default" className="text-xs bg-primary text-white">
                           <BookOpen className="h-3 w-3 mr-1" />
                           Destaque
                         </Badge>
                       )}
+                      {/* Show additional tags if there are no categories or few categories */}
+                      {post.categories.length < 2 && post.tags.slice(0, 2 - post.categories.length).map((tag) => (
+                        <Badge key={tag} variant="outline" className="text-xs bg-white/90 backdrop-blur-sm">
+                          {tag}
+                        </Badge>
+                      ))}
                     </div>
 
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+
+                  <CardHeader className="space-y-3">
                     <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
                       <Link href={`/conteudos/${post.slug}`}>
                         {post.title}
                       </Link>
                     </CardTitle>
+
+                    {/* Date right below title */}
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <time>{formatDate(post.date)}</time>
+                    </div>
 
                     <CardDescription className="line-clamp-3">
                       {post.excerpt}
@@ -235,27 +285,15 @@ export default async function ConteudosPage({
                   </CardHeader>
 
                   <CardContent className="space-y-4">
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <User className="h-4 w-4" />
-                        <span>{post.author.name}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        <time>{formatDate(post.date)}</time>
+                        <span>{abbreviateName(post.author.name)}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
                         <span>{estimateReadTime(post.body)} min</span>
                       </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
                     </div>
 
                     <Button asChild variant="ghost" className="w-full justify-between group-hover:bg-primary group-hover:text-primary-foreground transition-colors">

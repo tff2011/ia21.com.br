@@ -98,7 +98,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {
                   "@type": "ListItem",
                   "position": 1,
-                  "name": "Home",
+                  "name": "Início",
                   "item": "https://ia21.com.br"
                 },
                 {
