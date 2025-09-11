@@ -100,7 +100,7 @@ export function BlogSection() {
                   </div>
                   <div className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
-                    {new Date(post.publishedAt).toLocaleDateString('pt-BR')}
+                    {new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(new Date(post.publishedAt))}
                   </div>
                 </div>
 

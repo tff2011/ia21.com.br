@@ -1,12 +1,17 @@
-'use client'
+"use client"
 
 import { usePathname } from 'next/navigation'
 import { SessionProvider } from "next-auth/react";
 import { TRPCProvider } from "@/lib/trpc-client";
-import { Header } from "@/components/layout/header";
+import dynamic from 'next/dynamic'
 import { Footer } from "@/components/layout/footer";
 import BreadcrumbComponent from "@/components/breadcrumb";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+
+// Avoid SSR for Header to prevent hydration ID mismatches from auth state/Radix
+const Header = dynamic(() => import("@/components/layout/header").then(m => m.Header), {
+  ssr: false,
+})
 
 export function ClientLayout({
   children,

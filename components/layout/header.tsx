@@ -237,10 +237,10 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
                 aria-controls="mobile-menu"
                 aria-expanded={mobileMenuOpen}
                 aria-haspopup="dialog"
-                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                   theme === 'blue'
-                    ? 'text-brand-deep-navy-blue hover:text-brand-tech-blue hover:bg-brand-tech-blue/10 focus-visible:ring-brand-tech-blue'
-                    : 'text-brand-dark-gray hover:text-brand-metallic-gold hover:bg-brand-metallic-gold/10 focus-visible:ring-brand-metallic-gold'
+                    ? 'text-brand-deep-navy-blue hover:text-white hover:bg-brand-tech-blue focus-visible:ring-brand-tech-blue border border-brand-deep-navy-blue/20 hover:border-brand-tech-blue'
+                    : 'text-brand-dark-gray hover:text-white hover:bg-brand-metallic-gold focus-visible:ring-brand-metallic-gold border border-brand-dark-gray/20 hover:border-brand-metallic-gold'
                 }`}
               >
                 <span className="sr-only">Abrir menu principal</span>

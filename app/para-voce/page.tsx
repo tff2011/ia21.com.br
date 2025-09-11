@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { HeroSection } from '@/components/sections/hero-section'
+import { HeroSectionB2C } from '@/components/sections/hero-section-b2c'
+import { CompaniesCarousel } from '@/components/sections/companies-carousel'
 import { ProgramsSection } from '@/components/sections/programs-section'
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { CTASection } from '@/components/sections/cta-section'
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 export default function ParaVocePage() {
   return (
     <main className="min-h-screen theme-gold">
-      <HeroSection />
+      <HeroSectionB2C />
+      <CompaniesCarousel theme="gold" />
       <ProgramsSection />
       <TestimonialsSection />
       <CTASection />

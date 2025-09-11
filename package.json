@@ -22,6 +22,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@next-auth/prisma-adapter": "^1.0.7",
+    "@next/third-parties": "^15.5.3",
     "@portabletext/react": "^4.0.3",
     "@prisma/client": "^6.15.0",
     "@radix-ui/react-accordion": "^1.2.12",

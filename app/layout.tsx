@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ClientLayout } from "./layout-client";
 import "./globals.css";
 import { StructuredData } from "@/components/seo/structured-data";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -84,12 +85,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProd = process.env.NODE_ENV === 'production'
+  const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-WLTBJ7D7'
   return (
     <html lang="pt-BR">
       <head>
+        {isProd && GTM_ID && (
+          <GoogleTagManager gtmId={GTM_ID} />
+        )}
         <StructuredData />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        {isProd && GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
         <ClientLayout>
           {children}
         </ClientLayout>

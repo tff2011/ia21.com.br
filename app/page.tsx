@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { HeroSection } from '@/components/sections/hero-section'
+import { CompaniesCarousel } from '@/components/sections/companies-carousel'
 import { ProgramsSection } from '@/components/sections/programs-section'
 import { BlogSection } from '@/components/sections/blog-section'
 import { FAQSection } from '@/components/sections/faq-section'
@@ -100,6 +101,7 @@ export default function HomePage() {
       />
       <main className="min-h-screen">
         <HeroSection />
+        <CompaniesCarousel theme="gold" />
         <ProgramsSection />
         <BlogSection />
         <FAQSection />
