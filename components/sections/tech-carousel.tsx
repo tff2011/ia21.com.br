@@ -8,6 +8,7 @@ const technologies = [
   { name: 'DeepSeek', logo: '/empresas-ia/deepseek.png' },
   { name: 'Google Gemini', logo: '/empresas-ia/gemini.png' },
   { name: 'Google Veo 3', logo: '/empresas-ia/google-veo3.png' },
+  { name: 'Grok', logo: '/empresas-ia/grok.png' },
   { name: 'n8n', logo: '/empresas-ia/n8n.png' },
   { name: 'Nano Banana', logo: '/empresas-ia/nano-banana-logo.png' },
   { name: 'OpenAI', logo: '/empresas-ia/openai.png' },
