@@ -25,6 +25,7 @@ export function TestimonialsSection() {
       content: 'O programa de desenvolvimento web da IA21 transformou completamente minha carreira. Hoje trabalho com tecnologias modernas e recebo propostas incríveis.',
       rating: 5,
       theme: 'gold' as const,
+      image: '/carlos-silva.webp',
     },
     {
       id: 2,
@@ -34,6 +35,7 @@ export function TestimonialsSection() {
       content: 'Investimos na capacitação da equipe com a IA21 e os resultados foram impressionantes. Nossos produtos evoluíram significativamente.',
       rating: 5,
       theme: 'blue' as const,
+      image: '/mariana-costa.webp',
     },
     {
       id: 3,
@@ -43,6 +45,37 @@ export function TestimonialsSection() {
       content: 'Os instrutores são excepcionais e o conteúdo é muito prático. Aprendi mais em 8 semanas do que em cursos de 6 meses.',
       rating: 5,
       theme: 'gold' as const,
+      image: '/roberto-santos.webp',
+    },
+    {
+      id: 4,
+      name: 'Ana Paula',
+      role: 'Data Scientist',
+      company: 'DataTech Solutions',
+      content: 'A IA21 me deu as ferramentas necessárias para liderar projetos de machine learning em uma empresa multinacional. O conhecimento prático faz toda diferença.',
+      rating: 5,
+      theme: 'gold' as const,
+      image: '/ana-paula.webp',
+    },
+    {
+      id: 5,
+      name: 'João Pedro',
+      role: 'Product Manager',
+      company: 'FinTech Innovations',
+      content: 'Como gestor de produto, precisei entender tecnologia profundamente. A IA21 me proporcionou essa visão estratégica que estava faltando.',
+      rating: 5,
+      theme: 'blue' as const,
+      image: '/joao-pedro.webp',
+    },
+    {
+      id: 6,
+      name: 'Sofia Mendes',
+      role: 'UX Designer',
+      company: 'Digital Agency',
+      content: 'O programa de UX da IA21 revolucionou minha abordagem de design. Hoje crio experiências que realmente impactam os usuários e os negócios.',
+      rating: 5,
+      theme: 'gold' as const,
+      image: '/sofia-mendes.webp',
     },
   ]
 
@@ -76,10 +109,12 @@ export function TestimonialsSection() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-semibold text-primary">
-                      {testimonial.name.charAt(0)}
-                    </span>
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                    <img
+                      src={testimonial.image}
+                      alt={`Foto de perfil de ${testimonial.name}`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <div className="font-semibold">{testimonial.name}</div>
@@ -159,10 +194,12 @@ export function TestimonialsSection() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                        <span className="text-sm font-semibold text-primary">
-                          {testimonial.name.charAt(0)}
-                        </span>
+                      <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                        <img
+                          src={testimonial.image}
+                          alt={`Foto de perfil de ${testimonial.name}`}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>

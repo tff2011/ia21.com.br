@@ -1,6 +1,6 @@
 'use client'
 
-import { Sparkles, Rocket, Medal } from 'lucide-react'
+import { Medal } from 'lucide-react'
 
 const companies = [
   'Google',
@@ -17,28 +17,22 @@ export function CompaniesCarousel({ theme = 'gold' }: { theme?: 'gold' | 'blue' 
         secondary: '#0F1C3F',
         gradientFrom: 'from-[#1C3B6F]/5',
         gradientTo: 'to-[#0F1C3F]/5',
-        border: 'border-[#1C3B6F]/10',
         iconColor: 'text-[#1C3B6F]',
         logoGradientFrom: 'from-[#1C3B6F]',
         logoGradientTo: 'to-[#0F1C3F]',
         hoverColor: 'group-hover:text-[#1C3B6F]',
-        dividerColor: 'via-[#1C3B6F]',
-        decorativeLeft: 'text-[#1C3B6F]',
-        decorativeRight: 'text-[#0F1C3F]'
+        dividerColor: 'via-[#1C3B6F]'
       }
     : {
         primary: '#C8A253',
         secondary: '#B8860B',
         gradientFrom: 'from-[#C8A253]/5',
         gradientTo: 'to-[#0F1C3F]/5',
-        border: 'border-[#C8A253]/10',
         iconColor: 'text-[#C8A253]',
         logoGradientFrom: 'from-[#C8A253]',
         logoGradientTo: 'to-[#0F1C3F]',
         hoverColor: 'group-hover:text-[#C8A253]',
-        dividerColor: 'via-[#C8A253]',
-        decorativeLeft: 'text-[#C8A253]',
-        decorativeRight: 'text-[#0F1C3F]'
+        dividerColor: 'via-[#C8A253]'
       };
 
   return (
@@ -128,13 +122,6 @@ export function CompaniesCarousel({ theme = 'gold' }: { theme?: 'gold' | 'blue' 
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 opacity-20">
-        <Sparkles className={`h-4 w-4 ${colors.decorativeLeft}`} />
-      </div>
-      <div className="absolute right-6 top-1/2 transform -translate-y-1/2 opacity-20">
-        <Rocket className={`h-4 w-4 ${colors.decorativeRight}`} />
-      </div>
     </section>
 
       {/* Elegant Divider */}

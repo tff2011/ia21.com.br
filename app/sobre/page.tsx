@@ -56,32 +56,24 @@ export default function SobrePage() {
             </div>
           </section>
 
-          {/* Nossos fundadores */}
+          {/* Nosso fundador */}
           <section className="text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-12">Nossos Fundadores</h2>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-                <div className="w-20 h-20 mx-auto mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-12">Nosso Fundador</h2>
+            <div className="flex justify-center max-w-2xl mx-auto">
+              <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+                <div className="w-24 h-24 mx-auto mb-6">
                   <Image
                     src="/images/authors/foto-perfil.jpeg"
                     alt="Thiago Felizola Freires - Fundador da IA21 Educação"
-                    width={80}
-                    height={80}
+                    width={96}
+                    height={96}
                     className="rounded-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Thiago Felizola Freires</h3>
-                <p className="text-muted-foreground text-sm">
-                  Especialista em Inteligência Artificial com foco em aplicações práticas para negócios e educação. Fundador da IA21 Educação.
-                </p>
-              </div>
-              <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl">👩‍💼</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Nome do Fundador 2</h3>
-                <p className="text-muted-foreground text-sm">
-                  Pioneira em machine learning e transformação digital no mercado brasileiro.
+                <h3 className="text-2xl font-semibold mb-3">Thiago Felizola Freires</h3>
+                <p className="text-primary font-medium text-base mb-4">CEO</p>
+                <p className="text-muted-foreground text-base mb-4 leading-relaxed">
+                  Especialista em Inteligência Artificial com foco em aplicações práticas para negócios e educação. Fundador da IA21 Educação. Formado em Administração de Empresas pela Instituição de Ensino Superior de Brasília.
                 </p>
               </div>
             </div>
