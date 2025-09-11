@@ -67,7 +67,6 @@ export function Footer({ theme = 'gold' }: FooterProps) {
     name: '',
     email: ''
   })
-  const [showNameField, setShowNameField] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -75,7 +74,6 @@ export function Footer({ theme = 'gold' }: FooterProps) {
     onSuccess: (data) => {
       setMessage(data.message)
       setNewsletterData({ name: '', email: '' })
-      setShowNameField(false)
       setIsSubmitting(false)
     },
     onError: (error) => {
@@ -93,10 +91,9 @@ export function Footer({ theme = 'gold' }: FooterProps) {
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!newsletterData.email.trim()) return
     
-    if (!showNameField) {
-      setShowNameField(true)
+    if (!newsletterData.email.trim()) {
+      setMessage('Por favor, preencha seu email.')
       return
     }
 
@@ -262,27 +259,25 @@ export function Footer({ theme = 'gold' }: FooterProps) {
                 </p>
               )}
             </div>
-            <form onSubmit={handleEmailSubmit} className="mt-6 sm:flex sm:max-w-md lg:mt-0">
-              <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex">
-                {showNameField && (
-                  <div>
-                    <label htmlFor="newsletter-name" className="sr-only">
-                      Nome
-                    </label>
-                    <input
-                      type="text"
-                      name="newsletter-name"
-                      id="newsletter-name"
-                      autoComplete="name"
-                      required
-                      value={newsletterData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:w-48 sm:text-sm sm:leading-6`}
-                      placeholder="Seu nome"
-                    />
-                  </div>
-                )}
-                <div>
+            <form onSubmit={handleEmailSubmit} className="mt-6 sm:max-w-2xl lg:mt-0">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex-1">
+                  <label htmlFor="newsletter-name" className="sr-only">
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    name="newsletter-name"
+                    id="newsletter-name"
+                    autoComplete="name"
+                    required
+                    value={newsletterData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:text-sm sm:leading-6`}
+                    placeholder="Seu nome"
+                  />
+                </div>
+                <div className="flex-1">
                   <label htmlFor="newsletter-email" className="sr-only">
                     Endereço de email
                   </label>
@@ -294,17 +289,17 @@ export function Footer({ theme = 'gold' }: FooterProps) {
                     required
                     value={newsletterData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:w-64 sm:text-sm sm:leading-6`}
+                    className={`w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset ${currentTheme.input} sm:text-sm sm:leading-6`}
                     placeholder="Seu email"
                   />
                 </div>
-                <div className="mt-4 sm:mt-0 sm:flex-shrink-0">
+                <div className="sm:flex-shrink-0">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${currentTheme.button}`}
+                    className={`flex w-full sm:w-auto items-center justify-center rounded-md px-4 py-1.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${currentTheme.button}`}
                   >
-                    {isSubmitting ? 'Enviando...' : showNameField ? 'Confirmar' : 'Continuar'}
+                    {isSubmitting ? 'Enviando...' : 'Inscrever-se'}
                   </button>
                 </div>
               </div>
