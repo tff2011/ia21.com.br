@@ -101,8 +101,12 @@ export function HeroSection() {
                 </Button>
               </Link>
               <Link href="/para-empresas">
-                <Button variant="outline" size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto justify-center">
-                  Para Empresas
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto justify-center bg-brand-deep-navy-blue text-white border-brand-deep-navy-blue hover:bg-brand-deep-navy-blue/90 hover:text-white"
+                >
+                  IA para Empresas
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -190,8 +194,12 @@ export function HeroSection() {
                 </Button>
               </Link>
               <Link href="/para-empresas">
-                <Button variant="outline" size="lg" className="text-base px-6 py-5 w-full justify-center">
-                  Para Empresas
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-base px-6 py-5 w-full justify-center bg-brand-deep-navy-blue text-white border-brand-deep-navy-blue hover:bg-brand-deep-navy-blue/90 hover:text-white"
+                >
+                  IA para Empresas
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>

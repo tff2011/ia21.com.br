@@ -8,7 +8,7 @@ export function StructuredData() {
     url: baseUrl,
     logo: {
       "@type": "ImageObject",
-      url: `${baseUrl}/logo-flat-black-nobg.png`,
+      url: `${baseUrl}/logo-flat-black-nobg.svg`,
     },
     sameAs: [
       "https://x.com/ia21educacao",
@@ -86,4 +86,3 @@ export function StructuredData() {
     </>
   )
 }
-

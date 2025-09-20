@@ -134,4 +134,7 @@ Thumbs.db
 # SvelteKit build / generate output
 .svelte-kit
 
+# Local assets
+ia21.com.br/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,nextjs,prisma

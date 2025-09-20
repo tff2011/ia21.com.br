@@ -42,6 +42,7 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
 
   const isBusinessSection = pathname?.startsWith('/para-empresas')
   const isPersonalSection = pathname?.startsWith('/para-voce')
+  const isHomePage = pathname === '/'
 
   const getLogoText = () => {
     if (isBusinessSection) {
@@ -68,6 +69,13 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
     return name.split(' ').map(n => n[0]).join('').toUpperCase()
   }
 
+  const logoSrc = (() => {
+    if (isHomePage) return '/logo-flat-black-nobg.svg'
+    if (isBusinessSection) return '/logo-flat-navy-blue-nobg.svg'
+    if (isPersonalSection) return '/logo-flat-gold-nobg.svg'
+    return '/logo-flat-black-nobg.svg'
+  })()
+
   const iconForHref: Record<string, LucideIcon> = {
     '/programas': LayoutGrid,
     '/para-voce': User,
@@ -86,14 +94,14 @@ export function Header({ theme = 'gold' }: { theme?: 'gold' | 'blue' }) {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3">
             <Image
-              src={theme === 'blue' ? '/logo-flat-navy-blue-nobg.png' : '/logo-flat-gold-nobg.png'}
+              src={logoSrc}
               alt="IA21 Educação"
-              width={128}
-              height={32}
-              className="h-8 w-auto"
+              width={168}
+              height={42}
+              className="h-[42px] w-auto"
               priority
               quality={95}
-              sizes="(min-width: 1024px) 128px, 112px"
+              sizes="(min-width: 1024px) 168px, 140px"
             />
             {logoText && (
               <div className="flex items-center">

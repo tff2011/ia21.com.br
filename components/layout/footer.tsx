@@ -143,11 +143,11 @@ export function Footer({ theme = 'gold' }: FooterProps) {
             <div>
               <Link href="/" className="inline-flex items-center">
                 <Image
-                  src={useFallback ? '/logo-flat-black-nobg.png' : '/logo-flat-white-nobg.png'}
+                  src={useFallback ? '/logo-flat-black-nobg.svg' : '/logo-flat-white-nobg.svg'}
                   alt="IA21 Educação"
                   width={160}
                   height={40}
-                  className={`h-10 w-auto ${useFallback ? 'invert' : ''}`}
+                  className="h-10 w-auto"
                   priority
                   quality={95}
                   sizes="160px"

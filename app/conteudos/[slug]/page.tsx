@@ -105,7 +105,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       "name": "IA21 Educação",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://ia21.com.br/logo-flat-gold-nobg.png"
+        "url": "https://ia21.com.br/logo-flat-black-nobg.svg"
       }
     },
     "mainEntityOfPage": {
