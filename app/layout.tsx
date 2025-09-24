@@ -95,7 +95,7 @@ export default function RootLayout({
         )}
         <StructuredData />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body suppressHydrationWarning className={`${inter.variable} font-sans antialiased`}>
         {isProd && GTM_ID && (
           <noscript>
             <iframe

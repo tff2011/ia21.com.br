@@ -1,58 +1,71 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Clock, Users, Star, ArrowRight } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 export function ProgramsSection() {
   const pathname = usePathname()
   const isBusinessTheme = pathname?.startsWith('/para-empresas')
-  const programs = [
+  const accentColor = isBusinessTheme ? 'text-brand-tech-blue' : 'text-brand-metallic-gold'
+  const accentBadgeClasses = isBusinessTheme
+    ? 'border-brand-tech-blue/40 text-brand-tech-blue'
+    : 'border-brand-metallic-gold/40 text-brand-metallic-gold'
+  const accentIconClass = isBusinessTheme ? 'text-brand-tech-blue' : 'text-brand-metallic-gold'
+
+  const pillars = [
     {
-      id: 1,
-      title: 'Fundamentos de Desenvolvimento Web',
-      description: 'Aprenda os conceitos essenciais de HTML, CSS e JavaScript para criar aplicações web.',
-      duration: '8 semanas',
-      level: 'Iniciante',
-      students: 156,
-      rating: 4.8,
-      theme: 'gold' as const,
-      price: 'R$ 299',
+      id: 'pillar-1',
+      badge: 'Pilar 1',
+      title: 'Conversar',
+      subtitle: 'Faça a IA trabalhar para você',
+      description:
+        'Use palavras simples para explicar o que você precisa. A IA passa de assistente confuso a parceiro inteligente.',
+      highlights: [
+        'Economize até 10 horas por semana com respostas certeiras',
+        'Resumos claros de reuniões e textos complexos',
+        'Pedidos que geram respostas certas de primeira',
+      ],
     },
     {
-      id: 2,
-      title: 'React e Next.js Avançado',
-      description: 'Domine React, Next.js e técnicas modernas de desenvolvimento frontend.',
-      duration: '12 semanas',
-      level: 'Avançado',
-      students: 89,
-      rating: 4.9,
-      theme: 'gold' as const,
-      price: 'R$ 599',
+      id: 'pillar-2',
+      badge: 'Pilar 2',
+      title: 'Criar',
+      subtitle: 'Vire sua própria agência',
+      description:
+        'Transforme ideias em imagens, vídeos e textos profissionais mesmo sem saber design ou edição.',
+      highlights: [
+        'Produza 30 conteúdos premium por mês sem equipe',
+        'Vídeos com apresentador virtual sem aparecer na câmera',
+        'Campanhas completas sem depender de freelas',
+      ],
     },
     {
-      id: 3,
-      title: 'Desenvolvimento Full-Stack',
-      description: 'Implemente aplicações completas com frontend e backend integrados.',
-      duration: '6 semanas',
-      level: 'Intermediário',
-      students: 67,
-      rating: 4.7,
-      theme: 'blue' as const,
-      price: 'R$ 799',
+      id: 'pillar-3',
+      badge: 'Pilar 3',
+      title: 'Automatizar',
+      subtitle: 'Monte seu exército de robôs 24/7',
+      description:
+        'Deixe tarefas repetitivas rodando sozinhas enquanto você cuida do que traz resultado.',
+      highlights: [
+        'Coloque processos no piloto automático 24/7',
+        'Arquivos, e-mails e relatórios organizados sozinhos',
+        'Agenda e lembretes que se ajustam sem você pedir',
+      ],
     },
     {
-      id: 4,
-      title: 'UX/UI Design e Prototipagem',
-      description: 'Crie interfaces incríveis e experiências de usuário memoráveis.',
-      duration: '10 semanas',
-      level: 'Intermediário',
-      students: 134,
-      rating: 4.8,
-      theme: 'blue' as const,
-      price: 'R$ 499',
+      id: 'pillar-4',
+      badge: 'Pilar 4',
+      title: 'Analisar',
+      subtitle: 'Decida com base em fatos, não em achismos',
+      description:
+        'Enxergue oportunidades escondidas nos seus números e tome decisões seguras.',
+      highlights: [
+        'Tome decisões 3x mais certeiras com dados reais',
+        'Antecipe tendências e movimentos do mercado',
+        'Crie painéis simples que mostram o que importa',
+      ],
     },
   ]
 
@@ -61,70 +74,39 @@ export function ProgramsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Programas de <span className="text-primary">Excelência</span>
+            CCAA: o método de 4 passos para fazer IA trabalhar por você
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Escolha o programa ideal para seu perfil e acelere sua carreira em tecnologia
+            Conversar, Criar, Automatizar e Analisar — a fórmula que já transformou mais de 500 profissionais comuns em protagonistas digitais.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {programs.map((program) => (
-            <Card key={program.id} className="group hover:shadow-lg transition-all duration-300">
-              <CardHeader className="pb-4">
-                <div className="flex justify-between items-start mb-2">
-                  <Badge
-                    variant="default"
-                    className={
-                      isBusinessTheme
-                        ? 'bg-brand-tech-blue hover:bg-brand-tech-blue/90 text-white'
-                        : 'bg-brand-metallic-gold hover:bg-brand-metallic-gold/90 text-white'
-                    }
-                  >
-                    {program.level}
+          {pillars.map((pillar) => (
+            <Card key={pillar.id} className="h-full border-border/60 hover:border-primary/50 transition-colors">
+              <CardHeader className="pb-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <Badge variant="outline" className={`${accentBadgeClasses} uppercase tracking-wide`}>
+                    {pillar.badge}
                   </Badge>
-                  <div className="text-right">
-                    <div className="font-bold text-lg">{program.price}</div>
-                  </div>
                 </div>
-                <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                  {program.title}
-                </CardTitle>
-                <CardDescription className="text-sm">
-                  {program.description}
-                </CardDescription>
+                <CardTitle className="text-lg">{pillar.title}</CardTitle>
+                <p className="text-sm font-medium text-muted-foreground">{pillar.subtitle}</p>
+                <CardDescription className="text-sm">{pillar.description}</CardDescription>
               </CardHeader>
 
-              <CardContent className="pt-0">
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    {program.duration}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Users className="h-4 w-4" />
-                    {program.students} alunos
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Star className="h-4 w-4 fill-brand-metallic-gold text-brand-metallic-gold" />
-                    {program.rating} ({Math.floor(program.students * 0.3)}+ avaliações)
-                  </div>
-                </div>
-
-                <Button className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Saiba Mais
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+              <CardContent className="pt-0 space-y-4">
+                <ul className="space-y-2 text-sm text-foreground">
+                  {pillar.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-2">
+                      <CheckCircle2 className={`h-4 w-4 ${accentIconClass} mt-0.5`} />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center">
-          <Button size="lg" variant="outline" className="px-8">
-            Ver Todos os Programas
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
         </div>
       </div>
     </section>
