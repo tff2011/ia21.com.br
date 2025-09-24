@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation'
 export function ProgramsSection() {
   const pathname = usePathname()
   const isBusinessTheme = pathname?.startsWith('/para-empresas')
-  const accentColor = isBusinessTheme ? 'text-brand-tech-blue' : 'text-brand-metallic-gold'
   const accentBadgeClasses = isBusinessTheme
     ? 'border-brand-tech-blue/40 text-brand-tech-blue'
     : 'border-brand-metallic-gold/40 text-brand-metallic-gold'

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Play, Rocket } from 'lucide-react'
+import { ArrowRight, Play, ShieldCheck } from 'lucide-react'
 
 export function HeroSectionB2B() {
   const handleVideoPlay = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,27 +28,20 @@ export function HeroSectionB2B() {
           <div className="space-y-8">
             <div className="space-y-4">
               <Badge variant="secondary" className="px-3 py-1">
-                <Rocket className="w-4 h-4 mr-2" />
-                GRUPO IA21
+                CCAA ENTERPRISE
               </Badge>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight break-words max-w-[22ch] sm:max-w-[28ch]">
-                <span className="text-[#0B0B0B] font-black">Transforme sua</span>
-                <span className="bg-gradient-to-r from-[#1C3B6F] to-[#0F1C3F] bg-clip-text text-transparent font-black"> Empresa</span>
-                <br className="hidden sm:block" />
-                <span className="text-[#0B0B0B] font-black"> em Líder de</span>
-                <span className="bg-gradient-to-r from-[#1C3B6F] to-[#0F1C3F] bg-clip-text text-transparent font-black"> Mercado</span>
-                <br className="block" />
-                <span className="text-[#0B0B0B] font-black">com</span>
-                <span className="bg-gradient-to-r from-[#1C3B6F] to-[#0F1C3F] bg-clip-text text-transparent font-black"> IA</span>
-                <span className="text-[#0B0B0B] font-black"> Aplicada</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight break-words max-w-[24ch] sm:max-w-[30ch]">
+                <span className="text-[#0B0B0B] font-black">Reduza </span>
+                <span className="bg-gradient-to-r from-[#1C3B6F] to-[#0F1C3F] bg-clip-text text-transparent font-black">40% dos custos</span>
+                <span className="text-[#0B0B0B] font-black"> operacionais em 90 dias</span>
               </h1>
 
               {/* Elegant Divider below H1 */}
               <div className="w-20 h-0.5 bg-gradient-to-r from-[#1C3B6F] via-[#1C3B6F]/60 to-transparent rounded-full mt-4 mb-4"></div>
 
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-prose">
-                Programa corporativo completo: capacite toda sua equipe, reduza custos em até 40% e multiplique resultados
-                <span className="font-bold text-foreground"> com metodologia comprovada em 200+ empresas brasileiras</span>
+                Transforme cada funcionário em operador de IA altamente produtivo — sem trocar sistemas, sem contratar programadores,
+                sem complicação. Método comprovado que já economizou R$ 127 milhões para empresas brasileiras.
               </p>
             </div>
 
@@ -57,27 +50,37 @@ export function HeroSectionB2B() {
               <div className="grid grid-cols-3 gap-4 sm:gap-8">
                 <div className="text-left">
                   <div className="text-2xl sm:text-3xl font-bold text-primary">40%</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Redução de Custos</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Redução média de custos</div>
                 </div>
                 <div className="text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-primary">200+</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Empresas</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">R$ 127M</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Economizados no Brasil</div>
                 </div>
                 <div className="text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-primary">5x</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">ROI Médio</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">500+</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Equipes treinadas</div>
                 </div>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="hidden lg:flex sm:flex-row gap-3 sm:gap-4">
-              <Link href="/para-empresas">
+            <div className="hidden lg:flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link href="/contato">
                 <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 w-full sm:w-auto justify-center">
-                  Agendar Demonstração Executiva
+                  Agendar Diagnóstico Gratuito
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
+              <p className="text-sm text-muted-foreground">
+                ✓ Sem compromisso · ✓ Análise personalizada · ✓ Cálculo de ROI na hora
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3">
+              <ShieldCheck className="h-6 w-6 text-primary" />
+              <p className="text-sm text-muted-foreground">
+                Implementação guiada com indicadores auditáveis e acompanhamento executivo semanal.
+              </p>
             </div>
 
           </div>
@@ -129,27 +132,38 @@ export function HeroSectionB2B() {
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">40%</div>
-                  <div className="text-xs text-muted-foreground">Redução de Custos</div>
+                  <div className="text-xs text-muted-foreground">Redução média de custos</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">200+</div>
-                  <div className="text-xs text-muted-foreground">Empresas</div>
+                  <div className="text-2xl font-bold text-primary">R$ 127M</div>
+                  <div className="text-xs text-muted-foreground">Economizados</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">5x</div>
-                  <div className="text-xs text-muted-foreground">ROI Médio</div>
+                  <div className="text-2xl font-bold text-primary">500+</div>
+                  <div className="text-xs text-muted-foreground">Equipes treinadas</div>
                 </div>
               </div>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/para-empresas">
+              <Link href="/contato">
                 <Button size="lg" className="text-base px-6 py-5 w-full justify-center">
-                  Agendar Demonstração Executiva
+                  Agendar Diagnóstico Gratuito
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
+            </div>
+
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              ✓ Sem compromisso · ✓ Análise personalizada · ✓ Cálculo de ROI na hora
+            </p>
+
+            <div className="flex items-start gap-3 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3">
+              <ShieldCheck className="h-6 w-6 text-primary" />
+              <p className="text-sm text-muted-foreground">
+                Implementação guiada com indicadores auditáveis e acompanhamento executivo semanal.
+              </p>
             </div>
           </div>
 
