@@ -617,19 +617,7 @@ export default function ParaEmpresasPage() {
         </div>
       </section>
 
-      <footer className="py-12 bg-brand-deep-navy-blue text-white">
-        <div className="max-w-6xl mx-auto px-4 text-center space-y-6">
-          <p className="text-sm text-white/80">
-            © 2024 IA21 Educação. Todos os direitos reservados.
-          </p>
-          <Link href="/contato" className="inline-flex justify-center">
-            <Button variant="secondary" className="bg-white text-brand-deep-navy-blue hover:bg-white/90">
-              Falar com a IA21
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-      </footer>
+      <footer className="py-12 bg-brand-deep-navy-blue" />
     </main>
   )
 }
